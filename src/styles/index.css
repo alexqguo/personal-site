@@ -1,4 +1,4 @@
-/* Reset */
+/* Base styles for the website */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,7 +22,6 @@ time, mark, audio, video {
 
 body {
   font-family: 'Titillium Web', sans-serif;
-  background-color: black;
 }
 
 h1 { font-size: 2em; }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Head from '../components/head';
-import './index.css';
+import '../styles/index.css';
 
 const Layout = ({ children, data }) => (
   <div>
