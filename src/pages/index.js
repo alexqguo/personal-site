@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import BackgroundTile from '../components/backgroundTile';
-import '../styles/home.css';
 
 const Content = styled.div`
   top: 0;
@@ -81,6 +80,9 @@ class HomePage extends React.Component {
 
     return (
       <div>
+        // I do know how shitty this is
+        <style dangerouslySetInnerHTML={{__html: `body{background-color:black;}`}}></style>
+
         <Background className="background" aria-hidden="true">
           {images}
         </Background>
