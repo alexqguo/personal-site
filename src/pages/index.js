@@ -20,6 +20,15 @@ const Background = styled.div`
   filter: brightness(40%);
 `;
 
+const Greeting = styled.h1`
+  opacity: 0;
+  transition: 0.5s;
+
+  &.active {
+    opacity: 1;
+  }
+`;
+
 class HomePage extends React.Component {
 
   static shuffle(a) {
@@ -32,7 +41,11 @@ class HomePage extends React.Component {
   }
 
   static loadImages(images) {
-    if (images.length === 0) { return; } // return or trigger something else
+    // All images done loading
+    if (images.length === 0) {
+      document.querySelector('h1').classList.add('active');
+      return;
+    }
 
     const img = images.shift();
     img.src = img.getAttribute('data-src');
@@ -73,7 +86,7 @@ class HomePage extends React.Component {
         </Background>
 
         <Content>
-          <h1>{HomePage.getGreeting()}</h1>
+          <Greeting>{HomePage.getGreeting()}</Greeting>
         </Content>
       </div>
     );
