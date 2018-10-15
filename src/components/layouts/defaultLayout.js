@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StaticQuery, graphql } from 'gatsby';
 
-import Head from './core/Head';
-import Header from './header'
-import './layout.css'
+import Head from '../site/Head';
+import Header from '../header';
+import './defaultLayout.css';
 
 const Layout = ({ children }) => (
   <StaticQuery
