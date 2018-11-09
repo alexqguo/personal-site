@@ -1,11 +1,11 @@
 import React from 'react';
 
-import DefaultLayout from '../components/layouts/defaultLayout';
+import DefaultLayout from '../layouts/defaultLayout';
 
 const NotFoundPage = () => (
   <DefaultLayout>
     <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <p>This page does not exist</p>
   </DefaultLayout>
 );
 
