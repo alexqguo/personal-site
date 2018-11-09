@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
+import './index.css';
 import DefaultLayout from '../layouts/defaultLayout';
-
-const Greeting = styled.h1`
-  opacity: 0;
-  transition: 0.5s;
-
-  color: violet;
-
-  &.active {
-    opacity: 1;
-  }
-`;
 
 class HomePage extends Component {
 
@@ -40,9 +29,9 @@ class HomePage extends Component {
   render() {
     return (
       <DefaultLayout>
-        <Greeting className="greeting">
+        <h1 className="greeting">
           {HomePage.getGreeting()}
-        </Greeting>
+        </h1>
       </DefaultLayout>
     );
   }
