@@ -1,9 +1,0 @@
-.greeting {
-  opacity: 0;
-  transition: 0.5s;
-  color: violet;
-}
-
-.greeting.active {
-  opacity: 1;
-}
