@@ -1,13 +1,14 @@
 import React from 'react'
 
 import DefaultLayout from '../layouts/defaultLayout';
+import '../styles/index.css';
 
 const SecondPage = () => (
   <DefaultLayout>
     {/* I used a markdown to html converter for this. may be wonky */}
 
     <section id="threes">
-      <h1 class="threes-heading official-rules-of-threes">Official Rules of Threes</h1>
+      <h1 class="official-rules-of-threes">Official Rules of Threes</h1>
       <ul>
         <li>A &quot;serving&quot; is half of a light beer</li>
         <li>Pour a serving of beer into a cup before the round starts. If forgotten, you can pour the drink after a round is over, however the loser <strong>cannot</strong> pour their own drink</li>
@@ -18,7 +19,7 @@ const SecondPage = () => (
         <li>Positive vibes only</li>
         <li>Above all, respect the game</li>
       </ul>
-      <h2 class="threes-heading gameplay">Gameplay</h2>
+      <h2 class="gameplay">Gameplay</h2>
       <ul>
         <li>Players take turns drawing cards from a deck and showing them face up</li>
         <li>If you pull a three, you are safe</li>
@@ -32,7 +33,7 @@ const SecondPage = () => (
         <li>Any foul results in an immediate batsu game. The main game is resumed once the batsu is over</li>
         <li>If a round ends with everyone safe (everyone pulled a three), everyone instead loses and drinks a double serving</li>
       </ul>
-      <h2 class="threes-heading batsu-game-rules">Batsu game rules</h2>
+      <h2 class="batsu-game-rules">Batsu game rules</h2>
       <ul>
         <li>Batsu game is played 2v1, where the one is the offender and the two are any two other players</li>
         <li>Get creative and come up with a fun, quick game. Cannot repeat games
@@ -44,7 +45,7 @@ const SecondPage = () => (
         <li>If the offender loses, they drink double a serving</li>
         <li>No further fouls or chugging interruption penalties can occur during a batsu game</li>
       </ul>
-      <h2 class="threes-heading example-batsu-games">Example batsu games</h2>
+      <h2 class="example-batsu-games">Example batsu games</h2>
       <ul>
         <li>Handstand competition</li>
         <li>Furthest throw of a card</li>
@@ -53,7 +54,7 @@ const SecondPage = () => (
         <li>Tug of war (with a towel)</li>
         <li>Fastest to take all their clothes off and put them back on</li>
       </ul>
-      <h2 class="threes-heading example-fouls">Example fouls</h2>
+      <h2 class="example-fouls">Example fouls</h2>
       <ul>
           <li>Drawing out of order</li>
           <li>Spilling beer</li>
