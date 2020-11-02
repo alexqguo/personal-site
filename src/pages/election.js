@@ -19,6 +19,14 @@ const VOTE_MAP = Object.freeze({
   },
 });
 
+// For some reason ReactTooltip styles don't work in prod. Shitty workaround
+const TooltipContent = styled.div`
+  min-width: 200px;
+  background-color: #222;
+  padding: 8px 21px;
+  border-radius: 3px;
+`;
+
 const PredictionBox = styled.button`
   display: inline-block;
   width: 40px;
@@ -35,7 +43,7 @@ const StateTooltip = ({ state, userData, setVote }) => {
   const userVote = userData[state];
 
   return (
-    <div style={{ minWidth: 200 }}>
+    <TooltipContent style={{ minWidth: 200, backgroundColor: '#222' }}>
       <div><strong>{stateData.name}</strong></div>
       <div>Electoral votes: {stateData.electoralVotes}</div>
       {userVote ? <div>
@@ -52,7 +60,7 @@ const StateTooltip = ({ state, userData, setVote }) => {
           style={{ backgroundColor: VOTE_MAP[VOTE_D].color }}
         />
       </div>
-    </div>
+    </TooltipContent>
   );
 };
 
@@ -76,6 +84,20 @@ export default () => {
     setUserData({});
     localStorage.clear();
   };
+
+  const voteTotals = Object.keys(userData).reduce((acc, cur) => {
+    const state = cur;
+    const userVote = userData[state];
+    const { electoralVotes } = staticData[state];
+
+    return {
+      [VOTE_D]: acc[VOTE_D] + (userVote === VOTE_D ? electoralVotes : 0),
+      [VOTE_R]: acc[VOTE_R] + (userVote === VOTE_R ? electoralVotes : 0),
+    };
+  }, {
+    [VOTE_D]: 0,
+    [VOTE_R]: 0,
+  });
 
   return (
     <DefaultLayout title="Election">
@@ -426,6 +448,12 @@ export default () => {
           d="M385 593v55l36 45M174 525h144l67 68h86l53 54v46"
         ></path>
       </svg>
+
+      <section>
+        <h3>Electoral votes</h3>
+        <div>{VOTE_MAP[VOTE_D].candidate}: {voteTotals[VOTE_D]}</div>
+        <div>{VOTE_MAP[VOTE_R].candidate}: {voteTotals[VOTE_R]}</div>
+      </section>
     </DefaultLayout>
   );
 };
