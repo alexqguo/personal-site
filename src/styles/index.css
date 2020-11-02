@@ -1,7 +1,5 @@
 /*
-I don't remember exactly why, but for some reason gatsby includes this css in every page
-despite it only being requested on the index page. Should fix it eventually if it becomes
-a real problem.
+CSS files are included on every page https://github.com/gatsbyjs/gatsby/issues/3446
 */
 
 /* Home page */
@@ -13,18 +11,4 @@ a real problem.
 
 .greeting.active {
   opacity: 1;
-}
-
-/* Threes */
-#threes h1, #threes h2 {
-  margin-bottom: 5px;
-}
-#threes h2 {
-  margin-top: 25px;
-}
-#threes li {
-  line-height: 1.2;
-}
-#threes li ul {
-  margin-left: 20px;
 }

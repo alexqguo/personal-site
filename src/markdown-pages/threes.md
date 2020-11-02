@@ -1,0 +1,55 @@
+---
+slug: "/blog/threes"
+date: "2020-11-01"
+title: "The Official Rules of Threes"
+description: ""
+keywords: ""
+---
+
+* A "serving" is half of a light beer
+* Pour a serving of beer into a cup before the round starts. If forgotten, you can pour the drink after a round is over, however the loser **cannot** pour their own drink
+* The loser of the previous round goes first. If there were multiple losers, whoever finished their drink fastest gets "advantage" and goes first
+* There should be one three per person playing the game. Remove if less than four players, add if more (can use jokers)
+* When possible, things must be done in threes
+* Feel free to apply house rules as you see fit
+* Positive vibes only
+* Above all, respect the game
+
+<br/>
+
+## Gameplay
+* Players take turns drawing cards from a deck and showing them face up
+* If you pull a three, you are safe
+* Once all the threes are drawn, anyone without a three chugs a serving of beer
+* Before drinking, players **must** say "いただきます", "行きます", "cheers" or something similar
+* If the chug is interrupted in some way (lips coming off the cup, stopping to laugh), the cup is immediately topped up and the chug restarted
+  * Interruptions on the second chug are irrelevant
+* Any foul results in an immediate batsu game. The main game is resumed once the batsu is over
+* If a round ends with everyone safe (everyone pulled a three), everyone instead loses and drinks a double serving
+
+<br/>
+
+## Batsu game rules
+* Batsu game is played 2v1, where the one is the offender and the two are any two other players
+* Get creative and come up with a fun, quick game. Cannot repeat games
+  * The offender cannot choose their own batsu game. Decision/approval must come from the others in the group
+* If the offender wins, all others chug half a serving
+* If the offender loses, they drink double a serving
+* No further fouls or chugging interruption penalties can occur during a batsu game
+
+<br/>
+
+## Example batsu games
+* Handstand competition
+* Furthest throw of a card
+* Bouncing a coin into a cup
+* Hit a target with a frisbee
+* Tug of war (with a towel)
+* Fastest to take all their clothes off and put them back on
+
+<br/>
+
+## Example fouls
+* Drawing out of order
+* Spilling beer
+* Laughing or stopping during beer chug

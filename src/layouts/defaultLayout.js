@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import Head from '../components/common/head';
 import Header from '../components/common/header';
-import '../styles/defaultLayout.css';
 
 const SITE_METADATA_QUERY = graphql`
   query SiteTitleQuery {
