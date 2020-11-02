@@ -11,11 +11,11 @@ const VOTE_D = 'd';
 const VOTE_MAP = Object.freeze({
   [VOTE_R]: {
     candidate: 'Trump',
-    color: 'red',
+    color: 'tomato',
   },
   [VOTE_D]: {
     candidate: 'Biden',
-    color: 'blue',
+    color: 'dodgerblue',
   },
 });
 
@@ -45,11 +45,11 @@ const StateTooltip = ({ state, userData, setVote }) => {
         <span style={{ display: 'flex' }}>Predict outcome:</span>
         <PredictionBox
           onClick={() => setVote(state, VOTE_R)}
-          style={{ backgroundColor: 'red' }}
+          style={{ backgroundColor: VOTE_MAP[VOTE_R].color }}
         />
         <PredictionBox
           onClick={() => setVote(state, VOTE_D)}
-          style={{ backgroundColor: 'blue' }}
+          style={{ backgroundColor: VOTE_MAP[VOTE_D].color }}
         />
       </div>
     </div>
