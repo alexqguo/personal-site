@@ -22,15 +22,15 @@ const Container = styled.div`
   padding: 40px;
 `;
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title, description, keywords }) => (
   <StaticQuery
     query={SITE_METADATA_QUERY}
     render={data => (
       <>
         <Head
-          title={data.site.siteMetadata.title}
-          description={data.site.siteMetadata.description}
-          keywords={data.site.siteMetadata.keywords} />
+          title={title || data.site.siteMetadata.title}
+          description={description || data.site.siteMetadata.description}
+          keywords={keywords || data.site.siteMetadata.keywords} />
 
         <Header />
 
