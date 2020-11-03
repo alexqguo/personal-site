@@ -5,7 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import DefaultLayout from '../layouts/defaultLayout';
 import staticData from '../json/election.json';
 
-const LS_KEY = 'electionPredictions';
+const API_KEY = '$2b$10$ikhbV/5qJk.lKAxZKBmGRu0N/8qocKtgFQvxXKtma/1.LCZlQGu5i'; // whatever
+const LS_PROGRESS_KEY = 'electionPredictions';
 const VOTE_R = 'r';
 const VOTE_D = 'd';
 const VOTE_MAP = Object.freeze({
@@ -36,7 +37,23 @@ const PredictionBox = styled.button`
   cursor: pointer;
 `;
 
-const StateTooltip = ({ state, userData, setVote }) => {
+// Too lazy to do loading properly
+const LolLoading = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+
+  ::after {
+    display: block;
+    content: "Loading";
+    padding: 20px;
+  }
+`;
+
+const StateTooltip = ({ state, userData, hasPrediction, setVote }) => {
   const stateData = staticData[state];
   if (!stateData) return null;
 
@@ -49,7 +66,7 @@ const StateTooltip = ({ state, userData, setVote }) => {
       {userVote ? <div>
         Your Prediction: {VOTE_MAP[userVote].candidate}
       </div> : null}
-      <div>
+      {!hasPrediction ? <div>
         <span style={{ display: 'flex' }}>Predict outcome:</span>
         <PredictionBox
           onClick={() => setVote(state, VOTE_R)}
@@ -59,26 +76,79 @@ const StateTooltip = ({ state, userData, setVote }) => {
           onClick={() => setVote(state, VOTE_D)}
           style={{ backgroundColor: VOTE_MAP[VOTE_D].color }}
         />
-      </div>
+      </div> : null}
     </TooltipContent>
   );
 };
 
 export default () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [nameDraft, setNameDraft] = useState('');
   const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const existingUserData = JSON.parse(localStorage.getItem(LS_KEY));
-    if (existingUserData) {
+  const [prediction, setPrediction] = useState(null);
+
+  useEffect(async () => {
+    const existingUserData = JSON.parse(localStorage.getItem(LS_PROGRESS_KEY));
+    const existingPredictionId = window.location.hash.substring(1);
+
+    if (existingPredictionId) {
+      try {
+        const response = await fetch(`https://api.jsonbin.io/b/${existingPredictionId}/latest`);
+        const responseJson = await response.json();
+        const { prediction } = responseJson;
+        setUserData(prediction);
+        setPrediction(prediction);
+      } catch (e) {
+        console.error(e);
+        if (existingUserData) setUserData(existingUserData);
+      }
+    } else if (existingUserData) {
       setUserData(existingUserData);
     }
+
+    setIsLoading(false);
   }, []);
+
+  const submitVotes = async () => {
+    const allStates = Object.keys(staticData);
+    const userVotedStates = Object.keys(userData);
+
+    if (!nameDraft) {
+      alert('Please give your prediction a name!');
+    } else if (userVotedStates.length < allStates.length) {
+      const userStatesSet = new Set(userVotedStates);
+      const remainingStates = allStates.filter(s => !userStatesSet.has(s));
+      alert(`Please put a prediction for every state! Remaining: ${remainingStates.join(', ')}`);
+    } else {
+      setIsLoading(true);
+      const payload = {
+        name: nameDraft,
+        createdAt: Date.now(),
+        prediction: userData,
+      };
+      const response = await fetch('https://api.jsonbin.io/b', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'private': 'false',
+          'secret-key': API_KEY,
+        },
+        body: JSON.stringify(payload),
+      });
+      const responseJson = await response.json();
+      setIsLoading(false);
+      setPrediction(responseJson.data);
+      window.location.hash = responseJson.id;
+    }
+  };
 
   const setVote = (state, vote) => {
     const newUserData = { ...userData, [state]: vote };
 
     setUserData(newUserData);
-    localStorage.setItem(LS_KEY, JSON.stringify(newUserData));
-  }
+    localStorage.setItem(LS_PROGRESS_KEY, JSON.stringify(newUserData));
+  };
 
   const clearVotes = () => {
     setUserData({});
@@ -101,14 +171,35 @@ export default () => {
 
   return (
     <DefaultLayout title="Election">
-      <h1 style={{ marginBottom: 30 }}>Predict the election results!</h1>
-      <button style={{ fontSize: '.75em', display: 'block' }} onClick={clearVotes}>Reset</button>
+      {isLoading ? <LolLoading /> : null}
+
+      <h1 style={{ marginBottom: 30 }}>
+        {prediction ? prediction.name : 'Predict the election results!'}
+      </h1>
+
+      {!prediction ? <div>
+        <input value={nameDraft} placeholder="Name your prediction" onChange={(e) => setNameDraft(e.target.value)} />
+        <button style={{ fontSize: '.75em', marginRight: 10 }} onClick={submitVotes}>Submit</button>
+        <button style={{ fontSize: '.75em' }} onClick={clearVotes}>Reset</button>
+      </div> : null}
+
+      {prediction ? <section>
+        <h3>Electoral votes</h3>
+        <div>{VOTE_MAP[VOTE_D].candidate}: {voteTotals[VOTE_D]}</div>
+        <div>{VOTE_MAP[VOTE_R].candidate}: {voteTotals[VOTE_R]}</div>
+      </section> : null}
 
       <ReactTooltip
         clickable
         getContent={
-          (dataTip) => <StateTooltip state={dataTip} userData={userData} setVote={setVote} />
-        } />
+          (dataTip) => <StateTooltip 
+            state={dataTip}
+            hasPrediction={!!prediction}
+            userData={userData}
+            setVote={setVote}
+          />
+        }
+      />
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -448,12 +539,6 @@ export default () => {
           d="M385 593v55l36 45M174 525h144l67 68h86l53 54v46"
         ></path>
       </svg>
-
-      <section>
-        <h3>Electoral votes</h3>
-        <div>{VOTE_MAP[VOTE_D].candidate}: {voteTotals[VOTE_D]}</div>
-        <div>{VOTE_MAP[VOTE_R].candidate}: {voteTotals[VOTE_R]}</div>
-      </section>
     </DefaultLayout>
   );
 };
