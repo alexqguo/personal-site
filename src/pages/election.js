@@ -7,6 +7,7 @@ import staticData from '../json/election.json';
 
 const API_KEY = '$2b$10$ikhbV/5qJk.lKAxZKBmGRu0N/8qocKtgFQvxXKtma/1.LCZlQGu5i'; // whatever
 const LS_PROGRESS_KEY = 'electionPredictions';
+const LS_PREDICTION_KEY = 'lastPredictionId';
 const VOTE_R = 'r';
 const VOTE_D = 'd';
 const VOTE_MAP = Object.freeze({
@@ -86,10 +87,18 @@ export default () => {
   const [nameDraft, setNameDraft] = useState('');
   const [userData, setUserData] = useState({});
   const [prediction, setPrediction] = useState(null);
+  const [lastPredictionId, setLastPredictionId] = useState('');
 
   useEffect(async () => {
     const existingUserData = JSON.parse(localStorage.getItem(LS_PROGRESS_KEY));
+    const lastPredictionIdLS = localStorage.getItem(LS_PREDICTION_KEY);
     const existingPredictionId = window.location.hash.substring(1);
+
+    const hydrateUserDraft = () => {
+      if (existingUserData) {
+        setUserData(existingUserData);
+      }
+    }
 
     if (existingPredictionId) {
       try {
@@ -97,13 +106,17 @@ export default () => {
         const responseJson = await response.json();
         const { prediction } = responseJson;
         setUserData(prediction);
-        setPrediction(prediction);
+        setPrediction(responseJson);
       } catch (e) {
         console.error(e);
-        if (existingUserData) setUserData(existingUserData);
+        hydrateUserDraft();
       }
     } else if (existingUserData) {
-      setUserData(existingUserData);
+      hydrateUserDraft();
+    }
+
+    if (lastPredictionIdLS) {
+      setLastPredictionId(lastPredictionIdLS);
     }
 
     setIsLoading(false);
@@ -139,6 +152,7 @@ export default () => {
       const responseJson = await response.json();
       setIsLoading(false);
       setPrediction(responseJson.data);
+      localStorage.setItem(LS_PREDICTION_KEY, responseJson.id);
       window.location.hash = responseJson.id;
     }
   };
@@ -539,6 +553,12 @@ export default () => {
           d="M385 593v55l36 45M174 525h144l67 68h86l53 54v46"
         ></path>
       </svg>
+      
+      {!prediction && lastPredictionId ? <div>
+        <a href={`/election/#${lastPredictionId}`} target="_blank" style={{ fontSize: '.75em' }}>
+          Your last prediction
+        </a>
+      </div> : null}
     </DefaultLayout>
   );
 };
