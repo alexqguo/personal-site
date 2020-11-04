@@ -191,17 +191,17 @@ export default () => {
         {prediction ? prediction.name : 'Predict the election results!'}
       </h1>
 
-      {!prediction ? <div>
+      {!prediction ? <div style={{ marginBottom: 10 }}>
         <input value={nameDraft} placeholder="Name your prediction" onChange={(e) => setNameDraft(e.target.value)} />
         <button style={{ fontSize: '.75em', marginRight: 10 }} onClick={submitVotes}>Submit</button>
         <button style={{ fontSize: '.75em' }} onClick={clearVotes}>Reset</button>
       </div> : null}
 
-      {prediction ? <section>
+      <section>
         <h3>Electoral votes</h3>
         <div>{VOTE_MAP[VOTE_D].candidate}: {voteTotals[VOTE_D]}</div>
         <div>{VOTE_MAP[VOTE_R].candidate}: {voteTotals[VOTE_R]}</div>
-      </section> : null}
+      </section>
 
       <ReactTooltip
         clickable
