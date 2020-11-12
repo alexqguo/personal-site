@@ -6,7 +6,7 @@ import '../styles/blog.css';
 import Head from '../components/common/head';
 
 const PageContainer = styled.main`
-  padding: 60px;
+  padding: 60px 120px;
 `;
 
 const Date = styled.div`
@@ -15,6 +15,7 @@ const Date = styled.div`
 
 const BlogContents = styled.article`
   margin-top: 30px;
+  line-height: 1.75;
 `;
 
 const BackLinkContainer = styled.div`
