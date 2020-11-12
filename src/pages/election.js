@@ -110,7 +110,7 @@ export default () => {
 
     if (existingPredictionId) {
       try {
-        const resultsResp = await fetchJsonBin(CALLED_ID);
+        const resultsResp = await fetchJsonBin(`${CALLED_ID}/latest`);
         const predictionResp = await fetchJsonBin(`${existingPredictionId}/latest`);
         const { called } = resultsResp;
         const { prediction } = predictionResp;
