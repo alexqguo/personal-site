@@ -7,6 +7,10 @@ import Head from '../components/common/head';
 
 const PageContainer = styled.main`
   padding: 60px 120px;
+
+  @media (max-width: 600px) {
+    padding: 20px 40px;
+  }
 `;
 
 const Date = styled.div`
