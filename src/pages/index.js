@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import '../styles/index.css';
 import DefaultLayout from '../layouts/defaultLayout';
 
 class HomePage extends Component {

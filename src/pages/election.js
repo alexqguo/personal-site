@@ -97,6 +97,7 @@ export default () => {
   const [results, setResults] = useState(null);
   const [showResults, setShowResults] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const existingUserData = JSON.parse(localStorage.getItem(LS_PROGRESS_KEY));
     const lastPredictionIdLS = localStorage.getItem(LS_PREDICTION_KEY);
@@ -586,7 +587,7 @@ export default () => {
       </svg>
       
       {!prediction && lastPredictionId ? <div>
-        <a href={`/election/#${lastPredictionId}`} target="_blank" style={{ fontSize: '.75em' }}>
+        <a href={`/election/#${lastPredictionId}`} target="_blank" rel="noreferrer" style={{ fontSize: '.75em' }}>
           Your last prediction
         </a>
       </div> : null}

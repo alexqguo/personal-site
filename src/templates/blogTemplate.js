@@ -1,8 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-
-import '../styles/blog.css';
 import Head from '../components/common/head';
 
 const PageContainer = styled.main`
