@@ -25,12 +25,12 @@ body {
   font-weight: 200;
   font-family: 'Noto Serif JP', serif;
 
-  color: white;
-  background-color: black;
+  color: #ede0c8;
+  background-color: #1b1b1b;
 }
 
 a {
-  color: cyan;
+  color: #0dd;
 }
 
 a:visited {
