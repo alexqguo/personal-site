@@ -29,6 +29,12 @@ body {
   background-color: #1b1b1b;
 }
 
+table, th, td {
+  border: 1px solid #ede0c8;
+  border-collapse: collapse;
+  padding: 2px 5px;
+}
+
 a {
   color: #0dd;
 }
