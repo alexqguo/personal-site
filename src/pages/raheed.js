@@ -108,7 +108,7 @@ const PrizesForm = ({ onComplete }) => {
       return;
     }
     
-    window.localStorage.setItem(LS_KEY, JSON.stringify(prizes));
+    localStorage.setItem(LS_KEY, JSON.stringify(prizes));
     onComplete();
   };
 
@@ -159,8 +159,10 @@ const PrizesForm = ({ onComplete }) => {
 };
 
 const WheelPage = () => {
+  if (typeof window === 'undefined') return <></>; // Fucking gatsby
+
   const [wheel, setWheel] = useState(null);
-  const [hasPrizes, setHasPrizes] = useState(!!window.localStorage.getItem('prizes'));
+  const [hasPrizes, setHasPrizes] = useState(!!localStorage.getItem('prizes'));
   const [wheelState, setWheelState] = useState(WHEEL_STATES.loading);
 
   const onFinished = (segment) => {
@@ -181,7 +183,7 @@ const WheelPage = () => {
   };
 
   const reset = () => {
-    window.localStorage.removeItem(LS_KEY);
+    localStorage.removeItem(LS_KEY);
     setHasPrizes(false);
     setWheelState(WHEEL_STATES.needPrizes);
   }
@@ -192,7 +194,7 @@ const WheelPage = () => {
         await Promise.all(deps);
         setWheelState(WHEEL_STATES.idle);
   
-        const prizes = JSON.parse(window.localStorage.getItem(LS_KEY));
+        const prizes = JSON.parse(localStorage.getItem(LS_KEY));
         const segments = prizes.map((prize, idx) => ({
           text: prize.text,
           size: prize.percentage ? window.winwheelPercentToDegrees(prize.percentage) : undefined,
