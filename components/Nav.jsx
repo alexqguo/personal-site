@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 const Nav = () => (
-  <nav className="flex flex-col py-4 px-6 bg-white shadow w-full">
+  <nav className="flex flex-col py-4 px-6 shadow dark:shadow-slate-500 w-full">
     <div>
       <Link href="/">
         <a className="mr-4">Home</a>

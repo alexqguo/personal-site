@@ -42,9 +42,7 @@ export default ({ posts }) => {
         {posts.map(post => (
           <li key={post.slug}>
             <Link href={`/blog/${post.slug}`}>
-              <a className="text-blue-600 visited:text-purple-600">
-                {post.frontMatter.title}
-              </a>
+              {post.frontMatter.title}
             </Link>
 
             <span className="text-sm">

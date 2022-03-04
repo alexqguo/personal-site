@@ -21,3 +21,11 @@ h4 {
 p {
   @apply my-4;
 }
+
+a {
+  @apply dark:text-cyan-400 text-cyan-600 visited:text-purple-600;
+}
+
+html {
+  @apply text-slate-900 dark:text-slate-100;
+}
