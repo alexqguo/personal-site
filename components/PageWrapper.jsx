@@ -7,7 +7,7 @@ const PageWrapper = ({
 }) => (
   <>
     <Nav />
-    <main className="py-4 px-6">
+    <main className="py-4 px-6 animate-fade-in">
       {children}
     </main>
   </>

@@ -21,7 +21,7 @@ export default () => {
         title="Alex Guo"
         description="Something something personal website"
       />
-      <h1 className="animate-fade-in text-2xl">
+      <h1>
         {getGreeting()}
       </h1>
     </PageWrapper>
