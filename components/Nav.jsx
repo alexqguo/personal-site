@@ -5,10 +5,10 @@ const Nav = () => (
   <nav className="flex flex-col py-4 px-6 shadow dark:shadow-slate-500 w-full">
     <div>
       <Link href="/">
-        <a className="mr-4 text-black dark:text-white">Home</a>
+        <a className="mr-4 text-black visited:text-black visited:dark:text-white dark:text-white">Home</a>
       </Link>
       <Link href="/blog">
-        <a className="mr-4 text-black dark:text-white">Blog</a>
+        <a className="mr-4 text-black visited:text-black visited:dark:text-white dark:text-white">Blog</a>
       </Link>
     </div>
   </nav>
