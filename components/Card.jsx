@@ -12,6 +12,7 @@ const Card = ({
       <a
         href={href}
         target="_blank"
+        rel="noreferrer"
         className=""
       >
         <div className="px-6 py-4">
@@ -22,7 +23,7 @@ const Card = ({
       </a>
     </div>
     <span className="text-xs italic text-gray-700 dark:text-gray-400">
-      Repo: <a href={repoLink} target="_blank">{repoLink}</a>
+      Repo: <a href={repoLink} target="_blank" rel="noreferrer">{repoLink}</a>
     </span>
   </div>
 );

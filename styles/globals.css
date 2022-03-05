@@ -27,7 +27,7 @@ a {
 }
 
 html {
-  @apply text-slate-900 dark:text-slate-100;
+  @apply text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800;
 }
 
 .nav-link {
