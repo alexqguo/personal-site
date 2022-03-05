@@ -29,3 +29,7 @@ a {
 html {
   @apply text-slate-900 dark:text-slate-100;
 }
+
+.nav-link {
+  @apply mr-4 text-black visited:text-black visited:dark:text-white dark:text-white;
+}
