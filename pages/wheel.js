@@ -4,6 +4,8 @@ import PageHead from 'components/PageHead';
 import PageWrapper from 'components/PageWrapper';
 
 const LS_KEY = 'prizes';
+const PRIMARY_BTN = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800';
+const SECONDARY_BTN = 'py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700';
 
 const WHEEL_STATES = Object.freeze({
   idle: 'idle',
@@ -94,16 +96,18 @@ const PrizesForm = ({ onComplete }) => {
   return (
     <section>
       <h2 style={{ marginBottom: 20 }}>Choose the "prizes"</h2>
-      <table style={{ textAlign: 'left' }}>
-        <tbody>
+      <table className="table-fixed divide-gray-200 text-left mb-4">
+        <thead>
           <tr>
             <th style={{ width: 300 }}>Outcome</th>
             <th>
               Likelihood percentage
-              <div style={{ fontSize: '.7rem' }}> (optional. leave empty for even distribution)</div>
+              <div className="text-xs"> (optional. leave empty for even distribution)</div>
             </th>
             <th> </th>
           </tr>
+        </thead>
+        <tbody>
           {prizes.map((prize, idx) => <tr key={idx}>
             <td>{prize.text}</td>
             <td>{prize.percentage}</td>
@@ -112,6 +116,7 @@ const PrizesForm = ({ onComplete }) => {
           <tr>
             <td>
               <input
+                className="text-black"
                 type="text"
                 value={text}
                 style={{ width: '97%' }}
@@ -121,18 +126,31 @@ const PrizesForm = ({ onComplete }) => {
             </td>
             <td>
               <input
+                className="text-black"
                 type="number"
                 value={percentage}
                 onChange={({ target }) => setPercentage(target.value)}
               />
             </td>
 
-            <td><button onClick={addPrize}>Add</button></td>
+            <td>
+              <button
+                onClick={addPrize}
+                className={`${SECONDARY_BTN} py-2 px-2`}
+              >
+                Add
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
 
-      <button onClick={submit}>Submit</button>
+      <button
+        onClick={submit}
+        className={PRIMARY_BTN}
+      >
+        Submit
+      </button>
     </section>
   )
 };
@@ -169,10 +187,10 @@ const Wheel = () => {
 
   useEffect(() => {
     if (hasPrizes) {
-      (async function() {
-        await Promise.resolve({});
-        setWheelState(WHEEL_STATES.idle);
+      setWheelState(WHEEL_STATES.idle);
 
+      (async function() {
+        await Promise.resolve({}); // Too lazy to fix this right now
         const prizes = JSON.parse(localStorage.getItem(LS_KEY));
         const segments = prizes.map((prize, idx) => ({
           text: prize.text,
@@ -218,8 +236,20 @@ const Wheel = () => {
     <section>
       <h1>Spin the Wheel</h1>
       <canvas id="canvas" width="800" height="400"></canvas>
-      <button disabled={areButtonsDisabled} onClick={spin}>Spin!</button>
-      <button disabled={areButtonsDisabled} onClick={reset}>Reset</button>
+      <button
+        onClick={spin}
+        disabled={areButtonsDisabled}
+        className={PRIMARY_BTN}
+      >
+        Spin!
+      </button>
+      <button
+        onClick={reset}
+        disabled={areButtonsDisabled}
+        className={SECONDARY_BTN}
+      >
+        Reset
+      </button>
     </section>
   );
 };
