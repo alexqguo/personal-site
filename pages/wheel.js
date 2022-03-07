@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import Script from 'next/script';
 import PageHead from 'components/PageHead';
@@ -95,6 +96,7 @@ const PrizesForm = ({ onComplete }) => {
 
   return (
     <section>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h2 style={{ marginBottom: 20 }}>Choose the "prizes"</h2>
       <table className="table-fixed divide-gray-200 text-left mb-4">
         <thead>
