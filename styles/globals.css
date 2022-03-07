@@ -39,7 +39,7 @@ html {
 }
 
 .__nav-link {
-  @apply mr-4 text-black visited:text-black visited:dark:text-white dark:text-white;
+  @apply mr-6 text-black visited:text-black visited:dark:text-white dark:text-white;
 }
 
 .__tasting-post ul {

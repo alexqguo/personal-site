@@ -5,16 +5,16 @@ const Nav = () => (
   <nav className="flex flex-col py-4 px-6 shadow dark:shadow-slate-500 w-full">
     <div>
       <Link href="/">
-        <a className="__nav-link">Home</a>
+        <button role="link" className="__nav-link">Home</button>
       </Link>
       <Link href="/blog">
-        <a className="__nav-link">Blog</a>
+        <button role="link" className="__nav-link">Blog</button>
       </Link>
       <Link href="/tasting-series">
-        <a className="__nav-link">Tasting Series</a>
+        <button role="link" className="__nav-link">Tasting Series</button>
       </Link>
       <Link href="/other-projects">
-        <a className="__nav-link">Other Projects</a>
+        <button role="link" className="__nav-link">Other Projects</button>
       </Link>
     </div>
   </nav>
