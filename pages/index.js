@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PageHead from 'components/PageHead';
 import PageWrapper from 'components/PageWrapper';
 
 export default () => {
-  const getGreeting = () => {
+  const [greeting, setGreeting] = useState(null);
+
+  useEffect(() => {
     const date = new Date();
 
     if (date.getHours() >= 12 && date.getHours() <= 16) {
-      return 'Good afternoon';
+      setGreeting('Good afternoon');
     } else if (date.getHours() >= 5 && date.getHours() <= 11) {
-      return 'Good morning';
+      setGreeting('Good morning');
     } else {
-      return 'Good evening';
+      setGreeting('Good evening');
     }
-  };
+  }, []);
 
   return (
     <PageWrapper>
@@ -22,7 +24,7 @@ export default () => {
         description="Something something personal website"
       />
       <h1>
-        {getGreeting()}
+        {greeting}
       </h1>
     </PageWrapper>
   )
