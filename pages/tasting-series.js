@@ -97,7 +97,7 @@ const TOCSeason = ({
       <a href={`#${season.id}`}>{season.frontMatter.title}</a>
       <ul>
         {episodes.map(episode => (
-          <li className="ml-4 text-sm">
+          <li className="ml-4 text-sm" key={episode.id}>
             <a href={`#${episode.id}`}>
               {episode.season}.{episode.episode}{' '}
               {episode.frontMatter.title}
