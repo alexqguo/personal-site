@@ -49,3 +49,7 @@ html {
 .__tasting-post li {
   @apply ml-4;
 }
+
+.__tasting-post li, .__tasting-post p {
+  word-wrap: break-word;
+}
