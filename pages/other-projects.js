@@ -5,7 +5,7 @@ import PageWrapper from 'components/PageWrapper';
 
 export default () => (
   <PageWrapper>
-    <PageHead title="Other Projects" />
+    <PageHead title="Other Projects" description="Other things I've worked on" />
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <Card

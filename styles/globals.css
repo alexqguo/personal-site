@@ -18,6 +18,10 @@ h4 {
   @apply text-base font-bold md:text-lg;
 }
 
+h5 {
+  @apply font-bold;
+}
+
 p {
   @apply my-4;
 }
@@ -26,10 +30,22 @@ a {
   @apply dark:text-cyan-400 text-cyan-600 visited:text-purple-600;
 }
 
+ol {
+  @apply list-decimal;
+}
+
 html {
   @apply text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800;
 }
 
-.nav-link {
+.__nav-link {
   @apply mr-4 text-black visited:text-black visited:dark:text-white dark:text-white;
+}
+
+.__tasting-post ul {
+  @apply list-disc;
+}
+
+.__tasting-post li {
+  @apply ml-4;
 }
