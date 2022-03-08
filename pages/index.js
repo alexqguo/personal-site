@@ -5,6 +5,7 @@ import PageWrapper from 'components/PageWrapper';
 export default () => {
   const [greeting, setGreeting] = useState(null);
 
+  // Have to put this in an effect so the date will always be fresh and not cached from the server
   useEffect(() => {
     const date = new Date();
 
