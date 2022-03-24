@@ -130,7 +130,7 @@ const Tasting = ({
         <h4>Sponsors</h4>
         <ul>
           <li>
-            <strong className="text-yellow-400">Gold: </strong>Shana L, Dave S, Pinghao Q, Nancy H, Raheed A, JT A, Ben H, Gandherva GT, Andrew S
+            <strong className="text-yellow-400">Gold: </strong>Shana L, Dave S, Pinghao Q, Nancy H, Raheed A, JT A, Ben H, Gandherva GT, Andrew S, Alex V
           </li>
           <li>
             <strong className="text-gray-400">Silver: </strong>Ishan P, Alberto N, Sean P
