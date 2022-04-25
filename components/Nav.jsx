@@ -7,9 +7,6 @@ const Nav = () => (
       <Link href="/">
         <button role="link" className="__nav-link">Home</button>
       </Link>
-      <Link href="/blog">
-        <button role="link" className="__nav-link">Blog</button>
-      </Link>
       <Link href="/tasting-series">
         <button role="link" className="__nav-link">Tasting Series</button>
       </Link>

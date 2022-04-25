@@ -23,6 +23,13 @@ export default () => (
       />
 
       <Card
+        title="Drinking Board Game v2"
+        href="https://beta.drink.alexguo.co"
+        repoLink="https://github.com/alexqguo/drinking-board-game-v2"
+        description="Updated to support better remote play with Firebase"
+      />
+
+      <Card
         title="Sorting Algo Viz w/ JS Proxies"
         href="https://js-ol3vti.stackblitz.io"
         repoLink="https://github.com/alexqguo/proxy-example"
