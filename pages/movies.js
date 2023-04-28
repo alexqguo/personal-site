@@ -5,6 +5,7 @@ import PageWrapper from 'components/PageWrapper';
 
 // this is very very bad but I was challenged to do it in under an hour
 
+const DEFINITELY_NOT_AN_API_KEY = '$2b$10$ikhbV/5qJk.lKAxZKBmGRu0N/8qocKtgFQvxXKtma/1.LCZlQGu5i';
 const BIN_ID = '644c1a42b89b1e22999379af';
 
 const fetchAllMovies = async () => {
@@ -13,7 +14,7 @@ const fetchAllMovies = async () => {
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
-      'X-Master-Key': process.env.JSON_BIN_API_KEY,
+      'X-Master-Key': DEFINITELY_NOT_AN_API_KEY,
     },
   });
   return await response.json();
@@ -25,7 +26,7 @@ const updateBin = async (payload) => {
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
-      'X-Master-Key': process.env.JSON_BIN_API_KEY,
+      'X-Master-Key': DEFINITELY_NOT_AN_API_KEY,
     },
     body: JSON.stringify(payload),
   });
