@@ -114,6 +114,7 @@ export default () => {
               <button
                 onClick={() => watchMovie(m, 'M')}
                 className={`px-1 py-1 rounded-full font-semibold text-sm bg-${m.seen.M ? 'cyan' : 'gray'}-500 text-white`}
+                style={{ backgroundColor: m.seen.M ? 'cyan' : 'gray'}} // fuck you tailwind
               >
                 M
               </button>
@@ -121,6 +122,7 @@ export default () => {
               <button
                 onClick={() => watchMovie(m, 'A')}
                 className={`px-1 py-1 rounded-full font-semibold text-sm bg-${m.seen.A ? 'cyan' : 'gray'}-500 text-white`}
+                style={{ backgroundColor: m.seen.A ? 'cyan' : 'gray'}}
               >
                 A
               </button>
