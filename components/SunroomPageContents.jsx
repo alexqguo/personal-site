@@ -6,6 +6,8 @@ import { createClient } from '@supabase/supabase-js'
 import weatherIcons from './weatherIcons.json';
 import 'chart.js/auto'
 import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
+import ButtonGroup from './ButtonGroup';
+import { useRef } from 'react';
 
 const supabase = createClient(
   'https://aglflphmczffkcsoarls.supabase.co',
@@ -39,8 +41,15 @@ const COLORS = {
   outsideTemperature: 'purple',
 };
 
+const DISPLAY_MODES = {
+  temp: 'Temperature',
+  humidity: 'Humidity',
+  all: 'All'
+}
+
 const CHART_OPTIONS = {
   responsive: true,
+  animation: false,
   plugins: {
     legend: {
       position: 'bottom',
@@ -95,7 +104,8 @@ const createChartData = (weatherResponse, sunroomResponse) => {
       label: 'Outside humidity',
       data: getWeatherDataWithTimestamp(relative_humidity_2m),
       borderColor: COLORS.outsideHumidity,
-      yAxisID: 'humidity'
+      yAxisID: 'humidity',
+      hidden: true // Hide on initial load
     }, {
       label: 'Sunroom temperature',
       data: sunroomResponse.map((data) => ({ x: data.created_at, y: data.temperature })),
@@ -105,7 +115,8 @@ const createChartData = (weatherResponse, sunroomResponse) => {
       label: 'Sunroom humidity',
       data: sunroomResponse.map((data) => ({ x: data.created_at, y: data.humidity })),
       borderColor: 'orange',
-      yAxisID: 'humidity'
+      yAxisID: 'humidity',
+      hidden: true // Hide on initial load
     }]
   };
 }
@@ -113,7 +124,9 @@ const createChartData = (weatherResponse, sunroomResponse) => {
 const url = 'https://api.open-meteo.com/v1/forecast?latitude=40.7721&longitude=-73.9301&hourly=temperature_2m,relative_humidity_2m,weather_code&timezone=America%2FNew_York&past_days=7&forecast_days=1';
 
 const SunroomPageContents = () => {
+  const chartRef = useRef(null);
   const [data, setData] = useState(null);
+  const [displayMode, setDisplayMode] = useState(DISPLAY_MODES.temp); // "Temperature" | "Humidity" | "All"
 
   useEffect(() => {
     const performDataFetching = async () => {
@@ -127,6 +140,25 @@ const SunroomPageContents = () => {
     performDataFetching();
   }, [])
 
+  const changeDisplayMode = (newDisplayMode) => {
+    const temps = chartRef.current.data.datasets.filter((d) => d.yAxisID === 'temp');
+    const humidities = chartRef.current.data.datasets.filter((d) => d.yAxisID === 'humidity');
+
+    if (newDisplayMode === DISPLAY_MODES.temp) {
+      temps.forEach((t) => t.hidden = false);
+      humidities.forEach((t) => t.hidden = true);
+    } else if (newDisplayMode === DISPLAY_MODES.humidity) {
+      temps.forEach((t) => t.hidden = true);
+      humidities.forEach((t) => t.hidden = false);
+    } else {
+      temps.forEach((t) => t.hidden = false);
+      humidities.forEach((t) => t.hidden = false);
+    }
+
+    chartRef.current.update();
+    setDisplayMode(newDisplayMode);
+  }
+
   return (
     <PageWrapper>
       <PageHead title="Sunroom Temp Dashboard" description="Sunroom Temp Dashboard" />
@@ -134,10 +166,18 @@ const SunroomPageContents = () => {
       <div className="py-20 px-20">
         <div className="bg-white">
           {data && (
-            <Line
-              data={data}
-              options={CHART_OPTIONS}
-            />
+            <>
+              <Line
+                ref={chartRef}
+                data={data}
+                options={CHART_OPTIONS}
+              />
+              <ButtonGroup
+                initialValue={displayMode}
+                onChange={changeDisplayMode}
+                options={Object.values(DISPLAY_MODES)}
+              />
+            </>
           )}
         </div>
       </div>
