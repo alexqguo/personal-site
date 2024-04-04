@@ -3,6 +3,7 @@ import PageWrapper from 'components/PageWrapper';
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { createClient } from '@supabase/supabase-js'
+import weatherIcons from './weatherIcons.json';
 import 'chart.js/auto'
 import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
 
@@ -27,9 +28,15 @@ const fetchWeatherData = async () => {
   return result;
 };
 
+const isDayTime = (dateStr) => {
+  const date = new Date(dateStr);
+  const hour = date.getHours();
+  return hour >= 5 && hour < 18;
+}
+
 const COLORS = {
   outsideHumidity: 'teal',
-  outsideTemperature: 'tomato',
+  outsideTemperature: 'purple',
 };
 
 const CHART_OPTIONS = {
@@ -63,7 +70,7 @@ const CHART_OPTIONS = {
 
 const createChartData = (weatherResponse, sunroomResponse) => {
   const { hourly } = weatherResponse;
-  const { time, temperature_2m, relative_humidity_2m } = hourly;
+  const { time, temperature_2m, relative_humidity_2m, weather_code } = hourly;
   const getWeatherDataWithTimestamp = (data) => time.map((timestamp, idx) => ({
     y: data[idx],
     x: timestamp, // todo convert to num
@@ -74,6 +81,15 @@ const createChartData = (weatherResponse, sunroomResponse) => {
       label: 'Outside temperature',
       data: getWeatherDataWithTimestamp(temperature_2m),
       borderColor: COLORS.outsideTemperature,
+      pointStyle: (context) => {
+        const weatherCodeForDatapoint = weather_code[context.dataIndex];
+        const timestampForDatapoint = time[context.dataIndex];
+        const timeOfDayKey = isDayTime(timestampForDatapoint) ? 'day' : 'night';
+        const weatherCodeImgUrl = weatherIcons[weatherCodeForDatapoint][timeOfDayKey].image;
+        const img = new Image(35, 35);
+        img.src = weatherCodeImgUrl;
+        return img;
+      },
       yAxisID: 'temp'
     }, {
       label: 'Outside humidity',
