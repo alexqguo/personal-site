@@ -16,6 +16,8 @@ const supabase = createClient(
 
 const fetchSunroomData = async () => {
   const lastWeekDate = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
+  lastWeekDate.setHours(0, 0, 0, 0);
+
   const { data, error } = await supabase.from('sunroom')
     .select('created_at, temperature, humidity')
     .gt('created_at', lastWeekDate.toISOString())
@@ -37,33 +39,42 @@ const isDayTime = (dateStr) => {
 }
 
 const COLORS = {
-  outsideHumidity: 'teal',
-  outsideTemperature: 'purple',
+  humidity: 'teal',
+  temp: 'darkorchid',
 };
 
 const DISPLAY_MODES = {
   temp: 'Temperature',
   humidity: 'Humidity',
-  all: 'All'
 }
 
 const CHART_OPTIONS = {
   responsive: true,
   animation: false,
   plugins: {
-    legend: {
-      position: 'bottom',
-    },
+    legend: null,
+    tooltip: {
+      callbacks: {
+        label: (ctx) => {
+          if (ctx.dataset.label === 'Outside temperature') {
+            return `${ctx.dataset.label}: ${ctx.formattedValue} (${ctx.raw.weatherInfo.description})`
+          }
+        }
+      }
+    }
   },
   scales: {
     x: {
-      type: 'time'
+      type: 'time',
+      time: {
+        unit: 'day'
+      }
     },
     temp: {
       type: 'linear',
       position: 'left',
       ticks: {
-        color: COLORS.outsideTemperature
+        color: COLORS.temp
       }
     },
     humidity: {
@@ -71,11 +82,23 @@ const CHART_OPTIONS = {
       position: 'left',
       grid: { drawOnChartArea: false },
       ticks: {
-        color: COLORS.outsideHumidity
+        color: COLORS.humidity
       }
     }
   }
 };
+
+// May improve performance
+const imageMemo = (() => {
+  const cache = new Map();
+  return (url) => {
+    if (cache.has(url)) return cache.get(url);
+    const img = new Image(20, 20);
+    img.src = url;
+    cache.set(url, img);
+    return img;
+  }
+})();
 
 const createChartData = (weatherResponse, sunroomResponse) => {
   const { hourly } = weatherResponse;
@@ -83,38 +106,34 @@ const createChartData = (weatherResponse, sunroomResponse) => {
   const getWeatherDataWithTimestamp = (data) => time.map((timestamp, idx) => ({
     y: data[idx],
     x: timestamp, // todo convert to num
+    weatherInfo: weatherIcons[weather_code[idx]][isDayTime(timestamp) ? 'day' : 'night']
   }));
 
   return {
     datasets: [{
       label: 'Outside temperature',
       data: getWeatherDataWithTimestamp(temperature_2m),
-      borderColor: COLORS.outsideTemperature,
+      borderColor: '#ccc',
       pointStyle: (context) => {
-        const weatherCodeForDatapoint = weather_code[context.dataIndex];
-        const timestampForDatapoint = time[context.dataIndex];
-        const timeOfDayKey = isDayTime(timestampForDatapoint) ? 'day' : 'night';
-        const weatherCodeImgUrl = weatherIcons[weatherCodeForDatapoint][timeOfDayKey].image;
-        const img = new Image(35, 35);
-        img.src = weatherCodeImgUrl;
-        return img;
+        return imageMemo(context.raw.weatherInfo.image);
       },
       yAxisID: 'temp'
     }, {
       label: 'Outside humidity',
       data: getWeatherDataWithTimestamp(relative_humidity_2m),
-      borderColor: COLORS.outsideHumidity,
+      borderColor: '#ccc',
+      pointStyle: false,
       yAxisID: 'humidity',
       hidden: true // Hide on initial load
     }, {
       label: 'Sunroom temperature',
       data: sunroomResponse.map((data) => ({ x: data.created_at, y: data.temperature })),
-      borderColor: 'purple',
+      borderColor: COLORS.temp,
       yAxisID: 'temp'
     }, {
       label: 'Sunroom humidity',
       data: sunroomResponse.map((data) => ({ x: data.created_at, y: data.humidity })),
-      borderColor: 'orange',
+      borderColor: COLORS.humidity,
       yAxisID: 'humidity',
       hidden: true // Hide on initial load
     }]
@@ -135,6 +154,11 @@ const SunroomPageContents = () => {
         fetchWeatherData()
       ]);
       setData(createChartData(weatherData, sunroomData))
+
+      // Force update the chart to get the custom image points to render
+      setTimeout(() => {
+        chartRef.current.update();
+      }, 500)
     }
 
     performDataFetching();
@@ -163,23 +187,21 @@ const SunroomPageContents = () => {
     <PageWrapper>
       <PageHead title="Sunroom Temp Dashboard" description="Sunroom Temp Dashboard" />
 
-      <div className="py-20 px-20">
-        <div className="bg-white">
-          {data && (
-            <>
-              <Line
-                ref={chartRef}
-                data={data}
-                options={CHART_OPTIONS}
-              />
-              <ButtonGroup
-                initialValue={displayMode}
-                onChange={changeDisplayMode}
-                options={Object.values(DISPLAY_MODES)}
-              />
-            </>
-          )}
-        </div>
+      <div className="px-5 py-5 bg-white">
+        {data && (
+          <>
+            <Line
+              ref={chartRef}
+              data={data}
+              options={CHART_OPTIONS}
+            />
+            <ButtonGroup
+              initialValue={displayMode}
+              onChange={changeDisplayMode}
+              options={Object.values(DISPLAY_MODES)}
+            />
+          </>
+        )}
       </div>
     </PageWrapper>
   );

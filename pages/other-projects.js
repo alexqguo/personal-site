@@ -35,6 +35,12 @@ export default () => (
         repoLink="https://github.com/alexqguo/proxy-example"
         description="Sorting algorithm visualization+audio (inspired from that YouTube video) using JS Proxy objects"
       />
+
+      <Card
+        title="Sunroom Temperature Dashboard"
+        href="https://alexguo.co/sunroom"
+        description="Using a DHT22 sensor and RPi to compare tempature in my sunroom to the actual outside temperature"
+      />
     </div>
   </PageWrapper>
 );

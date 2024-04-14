@@ -22,9 +22,11 @@ const Card = ({
         </div>
       </a>
     </div>
-    <span className="text-xs italic text-gray-700 dark:text-gray-400">
-      Repo: <a href={repoLink} target="_blank" rel="noreferrer">{repoLink}</a>
-    </span>
+    {repoLink && (
+      <span className="text-xs italic text-gray-700 dark:text-gray-400">
+        Repo: <a href={repoLink} target="_blank" rel="noreferrer">{repoLink}</a>
+      </span>
+    )}
   </div>
 );
 
