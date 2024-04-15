@@ -75,7 +75,8 @@ const CHART_OPTIONS = {
       position: 'left',
       ticks: {
         color: COLORS.temp
-      }
+      },
+      display: 'auto'
     },
     humidity: {
       type: 'linear',
@@ -83,7 +84,8 @@ const CHART_OPTIONS = {
       grid: { drawOnChartArea: false },
       ticks: {
         color: COLORS.humidity
-      }
+      },
+      display: 'auto'
     }
   }
 };
