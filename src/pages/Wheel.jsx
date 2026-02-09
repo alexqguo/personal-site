@@ -1,46 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import PageHead from '../components/PageHead';
-import PageWrapper from '../components/PageWrapper';
+import React, { useState, useEffect } from "react";
+import PageHead from "../components/PageHead";
+import PageWrapper from "../components/PageWrapper";
 
-const LS_KEY = 'prizes';
-const PRIMARY_BTN = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800';
-const SECONDARY_BTN = 'py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700';
+const LS_KEY = "prizes";
+const PRIMARY_BTN =
+  "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2";
+const SECONDARY_BTN =
+  "py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700";
 
 const WHEEL_STATES = Object.freeze({
-  idle: 'idle',
-  loading: 'loading',
-  spinning: 'spinning',
-  needPrizes: 'needPrizes',
-  done: 'done',
+  idle: "idle",
+  loading: "loading",
+  spinning: "spinning",
+  needPrizes: "needPrizes",
+  done: "done",
 });
 
 const COLORS = Object.freeze([
-  'greenyellow',
-  'lightblue',
-  'pink',
-  'steelblue',
-  'springgreen',
-  'tan',
-  'blueviolet',
-  'palegoldenrod',
-  'indigo',
-  'fuchsia',
-  'slategray',
-  'darkseagreen',
-  'forestgreen',
-  'darkred',
-  'orange',
-  'gold'
+  "greenyellow",
+  "lightblue",
+  "pink",
+  "steelblue",
+  "springgreen",
+  "tan",
+  "blueviolet",
+  "palegoldenrod",
+  "indigo",
+  "fuchsia",
+  "slategray",
+  "darkseagreen",
+  "forestgreen",
+  "darkred",
+  "orange",
+  "gold",
 ]);
 
 const drawIndicator = () => {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
   const { width } = canvas;
   const centerX = width / 2;
 
-  ctx.strokeStyle = 'black';
-  ctx.fillStyle = 'brown';
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = "brown";
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(centerX - 10, 0);
@@ -53,17 +55,21 @@ const drawIndicator = () => {
 
 const PrizesForm = ({ onComplete }) => {
   const [prizes, setPrizes] = useState([]);
-  const [text, setText] = useState('');
-  const [percentage, setPercentage] = useState('');
+  const [text, setText] = useState("");
+  const [percentage, setPercentage] = useState("");
 
   const addPrize = () => {
     if (!text) return;
-    if (typeof percentage === 'number' && (percentage <= 0 || percentage >= 100)) return;
+    if (
+      typeof percentage === "number" &&
+      (percentage <= 0 || percentage >= 100)
+    )
+      return;
 
     const newPrizes = [...prizes];
-    newPrizes.push({ text, percentage, });
-    setText('');
-    setPercentage('');
+    newPrizes.push({ text, percentage });
+    setText("");
+    setPercentage("");
     setPrizes(newPrizes);
   };
 
@@ -81,10 +87,12 @@ const PrizesForm = ({ onComplete }) => {
       }
 
       return acc;
-    }, 0)
+    }, 0);
 
     if (totalPercentage > 100 || prizes.length < 2) {
-      alert('Invalid. Total percentages must be less than 100 and at least two prizes are required. Please fix and try again.');
+      alert(
+        "Invalid. Total percentages must be less than 100 and at least two prizes are required. Please fix and try again.",
+      );
       return;
     }
 
@@ -101,31 +109,38 @@ const PrizesForm = ({ onComplete }) => {
             <th style={{ width: 300 }}>Outcome</th>
             <th>
               Likelihood percentage
-              <div className="text-xs"> (optional. leave empty for even distribution)</div>
+              <div className="text-xs">
+                {" "}
+                (optional. leave empty for even distribution)
+              </div>
             </th>
             <th> </th>
           </tr>
         </thead>
         <tbody>
-          {prizes.map((prize, idx) => <tr key={idx}>
-            <td>{prize.text}</td>
-            <td>{prize.percentage}</td>
-            <td><button onClick={() => removePrize(idx)}>X</button></td>
-          </tr>)}
+          {prizes.map((prize, idx) => (
+            <tr key={idx}>
+              <td>{prize.text}</td>
+              <td>{prize.percentage}</td>
+              <td>
+                <button onClick={() => removePrize(idx)}>X</button>
+              </td>
+            </tr>
+          ))}
           <tr>
             <td>
               <input
-                className="text-black"
+                className="text-black bg-white"
                 type="text"
                 value={text}
-                style={{ width: '97%' }}
+                style={{ width: "97%" }}
                 placeholder="Text goes here"
                 onChange={({ target }) => setText(target.value)}
               />
             </td>
             <td>
               <input
-                className="text-black"
+                className="text-black bg-white"
                 type="number"
                 value={percentage}
                 onChange={({ target }) => setPercentage(target.value)}
@@ -135,7 +150,7 @@ const PrizesForm = ({ onComplete }) => {
             <td>
               <button
                 onClick={addPrize}
-                className={`${SECONDARY_BTN} py-2 px-2`}
+                className={`${SECONDARY_BTN} py-2 px-2 cursor-pointer`}
               >
                 Add
               </button>
@@ -144,27 +159,24 @@ const PrizesForm = ({ onComplete }) => {
         </tbody>
       </table>
 
-      <button
-        onClick={submit}
-        className={PRIMARY_BTN}
-      >
+      <button onClick={submit} className={PRIMARY_BTN}>
         Submit
       </button>
     </section>
-  )
+  );
 };
 
 const Wheel = () => {
-  if (typeof window === 'undefined') return <></>;
+  if (typeof window === "undefined") return <></>;
 
   const [wheel, setWheel] = useState(null);
-  const [hasPrizes, setHasPrizes] = useState(!!localStorage.getItem('prizes'));
+  const [hasPrizes, setHasPrizes] = useState(!!localStorage.getItem("prizes"));
   const [wheelState, setWheelState] = useState(WHEEL_STATES.loading);
 
   const onFinished = (segment) => {
     alert(segment.text);
     setWheelState(WHEEL_STATES.done);
-  }
+  };
 
   const spin = () => {
     wheel.stopAnimation(false);
@@ -180,27 +192,29 @@ const Wheel = () => {
     localStorage.removeItem(LS_KEY);
     setHasPrizes(false);
     setWheelState(WHEEL_STATES.needPrizes);
-  }
+  };
 
   useEffect(() => {
     if (hasPrizes) {
       setWheelState(WHEEL_STATES.idle);
 
-      (async function() {
+      (async function () {
         await Promise.resolve({});
         const prizes = JSON.parse(localStorage.getItem(LS_KEY));
         const segments = prizes.map((prize, idx) => ({
           text: prize.text,
-          size: prize.percentage ? window.winwheelPercentToDegrees(prize.percentage) : undefined,
+          size: prize.percentage
+            ? window.winwheelPercentToDegrees(prize.percentage)
+            : undefined,
           fillStyle: COLORS[idx % COLORS.length],
         }));
 
         const winwheel = new window.Winwheel({
-          canvasId: 'canvas',
+          canvasId: "canvas",
           numSegments: segments.length,
           segments,
           animation: {
-            type: 'spinToStop',
+            type: "spinToStop",
             duration: 5,
             spins: 15,
             callbackFinished: onFinished,
@@ -221,13 +235,11 @@ const Wheel = () => {
   }
 
   if (wheelState === WHEEL_STATES.needPrizes) {
-    return (
-      <PrizesForm onComplete={() => setHasPrizes(true)} />
-    );
+    return <PrizesForm onComplete={() => setHasPrizes(true)} />;
   }
 
-  const areButtonsDisabled = wheelState !== WHEEL_STATES.idle
-    && wheelState !== WHEEL_STATES.done;
+  const areButtonsDisabled =
+    wheelState !== WHEEL_STATES.idle && wheelState !== WHEEL_STATES.done;
 
   return (
     <section>
@@ -254,7 +266,10 @@ const Wheel = () => {
 export default function WheelPage() {
   return (
     <>
-      <PageHead title="Spin the Wheel" description="It's a wheel. What more do you want?" />
+      <PageHead
+        title="Spin the Wheel"
+        description="It's a wheel. What more do you want?"
+      />
       <script src="https://cdn.jsdelivr.net/npm/greensock@1.20.2/dist/TweenMax.min.js" />
       <script src="https://cdn.jsdelivr.net/npm/winwheeljs@2.7.0/dist/Winwheel.min.js" />
       <Wheel />

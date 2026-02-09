@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Nav = () => (
-  <nav className="flex flex-col py-4 px-6 shadow dark:shadow-slate-500 w-full">
+  <nav className="flex flex-col py-4 px-6 shadow w-full">
     <div>
       <Link to="/" className="__nav-link">Home</Link>
       <Link to="/tasting-series" className="__nav-link">Tasting Series</Link>

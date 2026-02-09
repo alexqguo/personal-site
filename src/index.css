@@ -4,21 +4,53 @@
   --animate-fade-in: fade-in 0.5s ease-out;
 
   @keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
 
-h1 { @apply text-2xl font-bold md:text-4xl my-4; }
-h2 { @apply text-xl font-bold md:text-3xl; }
-h3 { @apply text-lg font-bold md:text-2xl; }
-h4 { @apply text-base font-bold md:text-lg; }
-h5 { @apply font-bold; }
-p { @apply my-4; }
-a { @apply dark:text-cyan-400 text-cyan-600 visited:text-purple-600; }
-ol { @apply list-decimal; }
-html { @apply text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800; }
-.__nav-link { @apply mr-6 text-black visited:text-black visited:dark:text-white dark:text-white; }
-.__tasting-post ul { @apply list-disc; }
-.__tasting-post li { @apply ml-4; }
-.__tasting-post li, .__tasting-post p { word-wrap: break-word; }
+h1 {
+  @apply text-2xl font-bold md:text-4xl my-4;
+}
+h2 {
+  @apply text-xl font-bold md:text-3xl;
+}
+h3 {
+  @apply text-lg font-bold md:text-2xl;
+}
+h4 {
+  @apply text-base font-bold md:text-lg;
+}
+h5 {
+  @apply font-bold;
+}
+p {
+  @apply my-4;
+}
+a {
+  @apply text-cyan-800 visited:text-purple-800;
+}
+ol {
+  @apply list-decimal;
+}
+html {
+  @apply text-slate-900 bg-amber-50;
+  font-family: "Spectral", serif;
+}
+.__nav-link {
+  @apply mr-6 text-black visited:text-black;
+}
+.__tasting-post ul {
+  @apply list-disc;
+}
+.__tasting-post li {
+  @apply ml-4;
+}
+.__tasting-post li,
+.__tasting-post p {
+  word-wrap: break-word;
+}
