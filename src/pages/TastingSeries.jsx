@@ -1,12 +1,7 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemote } from 'next-mdx-remote'
+import PageHead from '../components/PageHead';
 
-import PageHead from 'components/PageHead';
-import PageWrapper from 'components/PageWrapper';
+const tastingPosts = import.meta.glob('../mdx/tasting/*.mdx', { eager: true });
 
 const formatFrontmatterDate = (dateStr) => (
   new Date(dateStr).toLocaleDateString('en-US', {
@@ -14,54 +9,15 @@ const formatFrontmatterDate = (dateStr) => (
   })
 );
 
-export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join('mdx/tasting'));
-  const postPromises = files.map(async (filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join('mdx/tasting', filename), 'utf-8');
-    const { data: frontMatter, content } = matter(markdownWithMeta);
-    const mdxSource = await serialize(content);
-    const id = filename.split('.')[0];
-    const seasonEpisode = id.split('_');
-
-    return {
-      id,
-      mdxSource,
-      frontMatter,
-      season: Number(seasonEpisode[0]),
-      episode: Number(seasonEpisode[1]),
-    };
-  });
-
-  const posts = await Promise.all(postPromises);
-  const postsBySeason = posts.reduce((acc, cur) => {
-    if (!acc[cur.season]) acc[cur.season] = [];
-    acc[cur.season].push(cur); // These should already be ordered if the filenames are correct
-
-    return acc;
-  }, {});
-
-  return {
-    props: {
-      posts,
-      postsBySeason,
-    },
-  };
-};
-
-const Post = ({
-  frontMatter,
-  mdxSource,
-  id,
-  episode,
-}) => {
+const Post = ({ frontMatter, children, id, episode }) => {
   if (episode === 0) {
     return (
       <section id={id} className="__tasting-post mb-8">
         <h2>{frontMatter.title}</h2>
-        <MDXRemote {...mdxSource} />
+        {children}
       </section>
-    )
-  };
+    );
+  }
 
   return (
     <section id={id} className="__tasting-post mb-8">
@@ -70,7 +26,7 @@ const Post = ({
         <div className="text-lg italic text-gray-700 dark:text-gray-300">{frontMatter.subtitle}</div>
       ) : null}
 
-      <MDXRemote {...mdxSource} />
+      {children}
       <span className="text-xs">
         {formatFrontmatterDate(frontMatter.date)} - {frontMatter.location}
       </span>
@@ -86,9 +42,7 @@ const TOC = ({ postsBySeason }) => (
   </ul>
 );
 
-const TOCSeason = ({
-  posts
-}) => {
+const TOCSeason = ({ posts }) => {
   const season = posts[0];
   const episodes = posts.slice(1);
 
@@ -110,12 +64,30 @@ const TOCSeason = ({
   )
 };
 
-const Tasting = ({
-  posts,
-  postsBySeason,
-}) => {
+export default function TastingSeries() {
+  const posts = Object.entries(tastingPosts).map(([path, module]) => {
+    const filename = path.split('/').pop();
+    const id = filename.replace('.mdx', '');
+    const seasonEpisode = id.split('_');
+    const Component = module.default;
+
+    return {
+      id,
+      Component,
+      frontMatter: module.frontmatter,
+      season: Number(seasonEpisode[0]),
+      episode: Number(seasonEpisode[1]),
+    };
+  });
+
+  const postsBySeason = posts.reduce((acc, cur) => {
+    if (!acc[cur.season]) acc[cur.season] = [];
+    acc[cur.season].push(cur);
+    return acc;
+  }, {});
+
   return (
-    <PageWrapper>
+    <>
       <PageHead
         title="Tasting Series"
         description="Exploration of typically affordable beverages"
@@ -144,10 +116,10 @@ const Tasting = ({
       <TOC postsBySeason={postsBySeason} />
 
       {posts.map((post) => (
-        <Post {...post} key={post.id} />
+        <Post {...post} key={post.id}>
+          <post.Component />
+        </Post>
       ))}
-    </PageWrapper>
+    </>
   );
-};
-
-export default Tasting;
+}

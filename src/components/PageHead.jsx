@@ -1,21 +1,24 @@
 import React from 'react';
-import Head from 'next/head'
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet-async';
 
 const PageHead = ({
   title,
   description,
 }) => (
-  <Head>
+  <Helmet>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.png" />
-  </Head>
+  </Helmet>
 );
 
 PageHead.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
+};
+
+PageHead.defaultProps = {
+  description: '',
 };
 
 export default PageHead;

@@ -1,5 +1,5 @@
-import PageHead from 'components/PageHead';
-import PageWrapper from 'components/PageWrapper';
+import PageHead from './PageHead';
+import PageWrapper from './PageWrapper';
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { createClient } from '@supabase/supabase-js'

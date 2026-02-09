@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import PageHead from 'components/PageHead';
-import PageWrapper from 'components/PageWrapper';
+import PageHead from '../components/PageHead';
 
-export default () => {
+export default function Home() {
   const [greeting, setGreeting] = useState(null);
 
-  // Have to put this in an effect so the date will always be fresh and not cached from the server
   useEffect(() => {
     const date = new Date();
 
@@ -19,7 +17,7 @@ export default () => {
   }, []);
 
   return (
-    <PageWrapper>
+    <>
       <PageHead
         title="Alex Guo"
         description="Something something personal website"
@@ -27,6 +25,6 @@ export default () => {
       <h1>
         {greeting}
       </h1>
-    </PageWrapper>
-  )
-};
+    </>
+  );
+}

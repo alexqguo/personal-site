@@ -1,8 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
-import Script from 'next/script';
-import PageHead from 'components/PageHead';
-import PageWrapper from 'components/PageWrapper';
+import PageHead from '../components/PageHead';
+import PageWrapper from '../components/PageWrapper';
 
 const LS_KEY = 'prizes';
 const PRIMARY_BTN = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800';
@@ -96,7 +94,6 @@ const PrizesForm = ({ onComplete }) => {
 
   return (
     <section>
-      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h2 style={{ marginBottom: 20 }}>Choose the "prizes"</h2>
       <table className="table-fixed divide-gray-200 text-left mb-4">
         <thead>
@@ -170,13 +167,11 @@ const Wheel = () => {
   }
 
   const spin = () => {
-    // Reset wheel
     wheel.stopAnimation(false);
     wheel.rotationAngle = 0;
     wheel.draw();
     drawIndicator();
 
-    // Spin
     setWheelState(WHEEL_STATES.spinning);
     wheel.startAnimation();
   };
@@ -192,7 +187,7 @@ const Wheel = () => {
       setWheelState(WHEEL_STATES.idle);
 
       (async function() {
-        await Promise.resolve({}); // Too lazy to fix this right now
+        await Promise.resolve({});
         const prizes = JSON.parse(localStorage.getItem(LS_KEY));
         const segments = prizes.map((prize, idx) => ({
           text: prize.text,
@@ -256,15 +251,13 @@ const Wheel = () => {
   );
 };
 
-const Page = () => (
-  <PageWrapper>
-    <PageHead title="Spin the Wheel" description="It's a wheel. What more do you want?" />
-    {/* External dependencies */}
-    <Script strategy="beforeInteractive" src="https://cdn.jsdelivr.net/npm/greensock@1.20.2/dist/TweenMax.min.js" />
-    <Script strategy="beforeInteractive" src="https://cdn.jsdelivr.net/npm/winwheeljs@2.7.0/dist/Winwheel.min.js" />
-
-    <Wheel />
-  </PageWrapper>
-)
-
-export default Page;
+export default function WheelPage() {
+  return (
+    <>
+      <PageHead title="Spin the Wheel" description="It's a wheel. What more do you want?" />
+      <script src="https://cdn.jsdelivr.net/npm/greensock@1.20.2/dist/TweenMax.min.js" />
+      <script src="https://cdn.jsdelivr.net/npm/winwheeljs@2.7.0/dist/Winwheel.min.js" />
+      <Wheel />
+    </>
+  );
+}
