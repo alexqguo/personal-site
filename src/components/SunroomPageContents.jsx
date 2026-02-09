@@ -1,5 +1,3 @@
-import PageHead from './PageHead';
-import PageWrapper from './PageWrapper';
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { createClient } from '@supabase/supabase-js'
@@ -186,9 +184,7 @@ const SunroomPageContents = () => {
   }
 
   return (
-    <PageWrapper>
-      <PageHead title="Sunroom Temp Dashboard" description="Sunroom Temp Dashboard" />
-
+    <>
       <div className="px-5 py-5 bg-white">
         {data && (
           <>
@@ -205,7 +201,7 @@ const SunroomPageContents = () => {
           </>
         )}
       </div>
-    </PageWrapper>
+    </>
   );
 };
 
