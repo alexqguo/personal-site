@@ -140,9 +140,9 @@ export default function Home() {
           </div>
         )}
 
-        <button onClick={reset} className="reset-btn">
+        {/* <button onClick={reset} className="reset-btn">
           Reset
-        </button>
+        </button>*/}
       </div>
     </>
   );
