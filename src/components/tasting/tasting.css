@@ -12,6 +12,11 @@
 }
 
 /* ── Tasting List View ──────────────────────────────────────────────── */
+footer {
+  color: #64748b;
+  font-size: 0.6rem;
+  font-style: italic;
+}
 
 .__tasting-list {
   max-width: 680px;

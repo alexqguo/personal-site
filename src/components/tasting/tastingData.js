@@ -6,12 +6,11 @@ const DEFAULT_YOUTUBE_ID = "mSX3OyW9Rao";
 
 // Tag descriptions — configurable here, not tied to MDX files
 const TAG_DESCRIPTIONS = {
-  Wine: "The original season. Exploring the wide world of budget wines — from box wine to bum wine, we tasted them all so you don't have to.",
+  Wine: '"Wine"',
   "Malt Liquor":
     "Technically speaking, many different drinks are made with malted barley. However, what we focused on is malt liquor — beverages that utilize corn or sugar during brewing to increase alcohol percentage, with flavors added on top.",
   "Spiked Seltzers":
     "A year ago, this would never have happened. But with where the spiked seltzer industry was, there was no better choice for the theme of Season Three. So enjoy and taste responsibly!",
-
 };
 
 function formatDate(dateStr) {
@@ -26,7 +25,7 @@ function formatDate(dateStr) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }
+    },
   );
 }
 
@@ -51,7 +50,7 @@ function processEpisodes() {
   }
 
   episodes.sort((a, b) =>
-    a.season !== b.season ? a.season - b.season : a.episode - b.episode
+    a.season !== b.season ? a.season - b.season : a.episode - b.episode,
   );
   episodes.forEach((ep, i) => {
     ep.sequentialNum = i + 1;

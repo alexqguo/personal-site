@@ -43,6 +43,10 @@ export default function TastingSeries() {
           />
         ))}
       </div>
+
+      <footer>
+        Written content within The Tasting Atelier is 100% human generated!
+      </footer>
     </>
   );
 }
