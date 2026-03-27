@@ -95,14 +95,16 @@ export default function TastingSeries() {
   return (
     <>
       <PageHead
-        title="Tasting Series"
+        title="Tasting Atelier"
         description="Exploration of typically affordable beverages"
       />
 
-      <h1>The Tasting Series</h1>
+      <h1>Tasting Atelier</h1>
       <p>
-        Welcome! This page is still under construction. A description will be
-        put here shortly.
+        Welcome! Tasting Atlier is an ongoing series of curating tasting
+        experiences for exploring flavor, craft, and connection with others.
+        
+        asdf
       </p>
 
       <section className="mb-4 text-sm">
