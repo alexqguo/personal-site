@@ -101,10 +101,10 @@ export default function TastingSeries() {
 
       <h1>Tasting Atelier</h1>
       <p>
-        Welcome! Tasting Atlier is an ongoing series of curating tasting
-        experiences for exploring flavor, craft, and connection with others.
-        
-        asdf
+        Welcome! Tasting Atlier is an ongoing series of curating and inclusive
+        tasting experiences for exploring flavor, craft, and connection with
+        others. Come join us to deepen your appreciation for the artistry behind
+        what you taste and enjoy moments of shared discovery!
       </p>
 
       <section className="mb-4 text-sm">
