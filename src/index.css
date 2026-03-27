@@ -44,13 +44,4 @@ html {
 .__nav-link {
   @apply mr-6 text-black visited:text-black;
 }
-.__tasting-post ul {
-  @apply list-disc;
-}
-.__tasting-post li {
-  @apply ml-4;
-}
-.__tasting-post li,
-.__tasting-post p {
-  word-wrap: break-word;
-}
+

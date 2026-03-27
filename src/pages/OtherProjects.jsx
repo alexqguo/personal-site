@@ -2,7 +2,7 @@ import React from "react";
 import PageHead from "../components/PageHead";
 
 const featured = {
-  title: "The Drinking Board Game",
+  title: "The DBG",
   href: "https://drink.alexguo.co",
   repoLink: "https://github.com/alexqguo/yoyoza-games",
   description:
@@ -15,7 +15,7 @@ const projects = [
     title: "Pizza Box Game",
     href: "https://pizza.alexguo.co",
     repoLink: "https://github.com/alexqguo/pizza-box-game",
-    description: "Online drinking game based off a viral Reddit comment",
+    description: "Online drinking game based off a Reddit comment",
     tag: "Drinking Games",
   },
   {
@@ -137,7 +137,9 @@ export default function OtherProjects() {
                   className={[
                     "py-5 px-5",
                     // mobile: top border on all but first
-                    showMobileTopBorder ? "border-t border-t-[#d0ccc4] md:border-t-0" : "",
+                    showMobileTopBorder
+                      ? "border-t border-t-[#d0ccc4] md:border-t-0"
+                      : "",
                     // desktop: right border for non-last-in-row
                     showRightBorder ? "md:border-r md:border-r-[#d0ccc4]" : "",
                     // desktop: top border for second row
