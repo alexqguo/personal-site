@@ -73,7 +73,7 @@ export default function OtherProjects() {
         description="Other things I've worked on"
       />
 
-      <div className="bg-[#faf8f3] -mx-6 -mt-4 px-6 pb-20 min-h-screen">
+      <div className="-mx-6 -mt-4 px-6 pb-20 min-h-screen">
         <div className="max-w-[960px] mx-auto pt-10">
           {/* Masthead */}
           <div className="border-t-4 border-[#1a1a1a] border-b border-b-[#1a1a1a] py-4 mb-10 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
@@ -86,7 +86,7 @@ export default function OtherProjects() {
             <p className="text-[11px] tracking-[0.15em] uppercase text-[#666] sm:border-l sm:border-[#ccc] sm:pl-6 leading-relaxed">
               Personal work &amp; side experiments
               <br />
-              by Alex Guo
+              Alex Guo
             </p>
           </div>
 
@@ -138,7 +138,7 @@ export default function OtherProjects() {
                     "py-5 px-5",
                     // mobile: top border on all but first
                     showMobileTopBorder
-                      ? "border-t border-t-[#d0ccc4] md:border-t-0"
+                      ? "max-md:border-t max-md:border-t-[#d0ccc4]"
                       : "",
                     // desktop: right border for non-last-in-row
                     showRightBorder ? "md:border-r md:border-r-[#d0ccc4]" : "",
