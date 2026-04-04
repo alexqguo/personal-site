@@ -357,6 +357,37 @@ footer {
   border-radius: 2px;
 }
 
+/* Bottom sheet: stack info + desc vertically on small screens */
+@media (max-width: 600px) {
+  .__dv-panel--bottom {
+    height: 55%;
+    flex-basis: 55%;
+  }
+  .__dv-panel--bottom .__dv-panel-inner {
+    overflow-y: auto;
+  }
+  .__dv-panel--bottom .__dv-content {
+    flex-direction: column;
+    overflow: visible;
+  }
+  .__dv-panel--bottom .__dv-info-col {
+    width: auto;
+    overflow: visible;
+    padding-right: 0;
+  }
+  .__dv-panel--bottom .__dv-desc-col {
+    overflow-y: visible;
+    padding-left: 0;
+    min-height: unset;
+  }
+  .__dv-panel--bottom .__dv-divider {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    margin: 0.875rem 0 1rem;
+    align-self: auto;
+  }
+}
+
 /* Divider */
 .__dv-divider {
   border: none;

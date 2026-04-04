@@ -4,7 +4,7 @@ import { formatDate, DEFAULT_YOUTUBE_ID } from "./tastingData";
 const GUTTER_YOUTUBE_ID = "UlJHCyUyXCg";
 
 export default function DetailView({ episode, onClose, gutterMode }) {
-  const [layout, setLayout] = useState("a");
+  const [layout, setLayout] = useState(() => window.innerWidth < 768 ? "b" : "a");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
