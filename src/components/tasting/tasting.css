@@ -309,7 +309,7 @@ footer {
   border: none;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0.2rem 0.5rem;
-  font-size: 0.65rem;
+  font-size: 1rem;
   font-family: inherit;
   color: #94a3b8;
   letter-spacing: 0.04em;
@@ -587,9 +587,6 @@ body:has([data-gutter="true"]) .__gutter-toggle:hover {
 /* Detail view overlay */
 [data-gutter="true"].__dv-overlay {
   background: #1a001a;
-}
-[data-gutter="true"] .__dv-video iframe {
-  filter: hue-rotate(160deg) saturate(1.8);
 }
 [data-gutter="true"] .__dv-panel {
   background: #0d0d1a;

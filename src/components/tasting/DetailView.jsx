@@ -42,13 +42,13 @@ export default function DetailView({ episode, onClose, gutterMode }) {
                 className={`__dv-lt-btn ${layout === "a" ? "active" : ""}`}
                 onClick={() => setLayout("a")}
               >
-                ⬜ Sidebar
+                ◨
               </button>
               <button
                 className={`__dv-lt-btn ${layout === "b" ? "active" : ""}`}
                 onClick={() => setLayout("b")}
               >
-                ▬ Bottom
+                ⬓
               </button>
             </div>
           </div>
