@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PageHead from "../components/PageHead";
 import "../components/tasting/tasting.css";
 import { episodes } from "../components/tasting/tastingData";
@@ -7,7 +8,15 @@ import EpisodeRow from "../components/tasting/EpisodeRow";
 import DetailView from "../components/tasting/DetailView";
 
 export default function TastingSeries() {
-  const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const hashNum = location.hash.startsWith("#e")
+    ? parseInt(location.hash.slice(2), 10)
+    : null;
+  const selectedEpisode = Number.isFinite(hashNum)
+    ? (episodes.find((ep) => ep.sequentialNum === hashNum) ?? null)
+    : null;
 
   return (
     <>
@@ -19,18 +28,16 @@ export default function TastingSeries() {
       {selectedEpisode && (
         <DetailView
           episode={selectedEpisode}
-          onClose={() => setSelectedEpisode(null)}
+          onClose={() => navigate(-1)}
         />
       )}
 
       <div className="__tasting-list">
         <h1>Tasting Atelier</h1>
         <p className="__tasting-tagline">
-          Welcome! Tasting Atelier is an ongoing series of curating and
-          inclusive tasting experiences for exploring flavor, craft, and
-          connection with others. Come join us to deepen your appreciation for
-          the artistry behind what you taste and enjoy moments of shared
-          discovery!
+          Welcome! The Tasting Atelier is an ongoing series of curated tasting
+          events, exploring the world of adult beverages through a unique lense.
+          You'll just have to join us to see what I mean.
         </p>
 
         <SponsorCards />
@@ -39,7 +46,7 @@ export default function TastingSeries() {
           <EpisodeRow
             key={ep.id}
             episode={ep}
-            onClick={() => setSelectedEpisode(ep)}
+            onClick={() => navigate(`#e${ep.sequentialNum}`)}
           />
         ))}
       </div>
