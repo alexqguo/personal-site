@@ -14,6 +14,10 @@
 
 # production
 /build
+/dist
+
+# ux concepts
+/concepts
 
 # misc
 .DS_Store
