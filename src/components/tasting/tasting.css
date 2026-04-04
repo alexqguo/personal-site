@@ -13,6 +13,9 @@
 
 /* ── Tasting List View ──────────────────────────────────────────────── */
 footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   color: #64748b;
   font-size: 0.6rem;
   font-style: italic;
@@ -22,6 +25,24 @@ footer {
   max-width: 680px;
   margin: 0 auto;
   padding-bottom: 3rem;
+}
+.__gutter-toggle {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.65rem;
+  color: #b0bec5;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.14s, border-color 0.14s;
+}
+.__gutter-toggle:hover {
+  color: #64748b;
+  border-color: rgba(0, 0, 0, 0.18);
 }
 .__tasting-tagline {
   color: #64748b;
@@ -386,4 +407,221 @@ footer {
 }
 .__dv-desc p:last-child {
   margin-bottom: 0;
+}
+
+/* ============================================================
+   GUTTER MODE  –  activated via data-gutter="true"
+   ============================================================ */
+
+/* Page background */
+body:has([data-gutter="true"]) {
+  background: repeating-linear-gradient(
+    135deg,
+    #cc0066 0px,
+    #cc0066 14px,
+    #0d0d0d 14px,
+    #0d0d0d 28px
+  );
+}
+body:has([data-gutter="true"]) footer {
+  color: #ff0066;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* List container */
+[data-gutter="true"].__tasting-list {
+  max-width: 100%;
+  padding: 1.5rem 2.5rem;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+[data-gutter="true"].__tasting-list h1 {
+  font-family: Impact, "Arial Narrow", sans-serif;
+  color: #ffff00;
+  text-shadow: 3px 3px 0 #ff0066, 6px 6px 0 #000;
+  font-size: 2.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Tagline */
+[data-gutter="true"] .__tasting-tagline {
+  color: #39ff14;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 1px 1px 0 #000;
+  border: 2px dashed #39ff14;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Toggle button */
+body:has([data-gutter="true"]) .__gutter-toggle {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background: #ffff00;
+  border: 3px solid #ff0066;
+  border-radius: 0;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  box-shadow: 3px 3px 0 #000;
+}
+body:has([data-gutter="true"]) .__gutter-toggle:hover {
+  background: #ff0066;
+  color: #ffff00;
+  border-color: #ffff00;
+}
+
+/* Sponsor cards */
+[data-gutter="true"] .__sponsors-label {
+  color: #ff0066;
+  text-shadow: 1px 1px 0 #000;
+}
+[data-gutter="true"] .__sc {
+  border: 3px solid #00ffff;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #000;
+}
+[data-gutter="true"] .__sc-gold {
+  background: linear-gradient(140deg, #ff0066, #ff6600, #ffff00);
+}
+[data-gutter="true"] .__sc-silver {
+  background: linear-gradient(140deg, #6600ff, #0066ff, #00ffff);
+}
+[data-gutter="true"] .__sc-bronze {
+  background: linear-gradient(140deg, #00ff66, #00ffff, #ff00ff);
+}
+[data-gutter="true"] .__sc-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+[data-gutter="true"] .__sc-names {
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Episode rows */
+[data-gutter="true"] .__ep-row {
+  border: 2px solid #ff0066;
+  border-radius: 0;
+  margin: 0 0 3px 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+[data-gutter="true"] .__ep-row:nth-child(even) {
+  border-color: #39ff14;
+}
+[data-gutter="true"] .__ep-row:hover {
+  background: rgba(255, 0, 102, 0.25);
+}
+[data-gutter="true"] .__ep-num {
+  color: #00ffff;
+}
+[data-gutter="true"] .__ep-title {
+  color: #ffff00;
+  text-shadow: 1px 1px 0 #000;
+}
+[data-gutter="true"] .__ep-subtitle {
+  color: #ff99cc;
+  font-style: normal;
+}
+[data-gutter="true"] .__ep-meta {
+  color: #99ff99;
+}
+[data-gutter="true"] .__ep-arrow {
+  color: #ff0066;
+}
+[data-gutter="true"] .__ep-row:hover .__ep-arrow {
+  color: #ffff00;
+}
+
+/* Tag pills */
+[data-gutter="true"] .__tag-pill {
+  background: #ff0066;
+  border-color: #cc0044;
+  color: #fff;
+  border-radius: 0;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+[data-gutter="true"] .__tag-tooltip {
+  background: #1a001a;
+  border-color: #ff0066;
+}
+[data-gutter="true"] .__tag-tooltip-inner {
+  color: #39ff14;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+/* Detail view overlay */
+[data-gutter="true"].__dv-overlay {
+  background: #1a001a;
+}
+[data-gutter="true"] .__dv-video iframe {
+  filter: hue-rotate(160deg) saturate(1.8);
+}
+[data-gutter="true"] .__dv-panel {
+  background: #0d0d1a;
+}
+[data-gutter="true"] .__dv-panel--sidebar {
+  border-left: 3px solid #ff0066;
+}
+[data-gutter="true"] .__dv-panel--bottom {
+  border-top: 3px solid #ff0066;
+}
+
+/* Detail top bar */
+[data-gutter="true"] .__dv-back-btn {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: #ff0066;
+  font-weight: bold;
+}
+[data-gutter="true"] .__dv-back-btn:hover {
+  color: #ffff00;
+}
+[data-gutter="true"] .__dv-layout-toggle {
+  border-color: #ff0066;
+}
+[data-gutter="true"] .__dv-lt-btn {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: #666;
+  background: #0d0d1a;
+  border-right-color: #330033;
+}
+[data-gutter="true"] .__dv-lt-btn.active {
+  background: #330033;
+  color: #ff0066;
+}
+[data-gutter="true"] .__dv-lt-btn:hover:not(.active) {
+  color: #ff99cc;
+}
+
+/* Detail episode metadata */
+[data-gutter="true"] .__dv-badge {
+  color: #00ffff;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+[data-gutter="true"] .__dv-title {
+  font-family: Impact, "Arial Narrow", sans-serif;
+  color: #ffff00;
+  text-shadow: 2px 2px 0 #ff0066;
+}
+[data-gutter="true"] .__dv-subtitle {
+  color: #ff99cc;
+  font-style: normal;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+[data-gutter="true"] .__dv-meta {
+  color: #39ff14;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+[data-gutter="true"] .__dv-divider {
+  border-top-color: #ff0066;
+}
+[data-gutter="true"] .__dv-panel--bottom .__dv-divider {
+  border-left-color: #ff0066;
+}
+[data-gutter="true"] .__dv-desc {
+  color: #d0d0ff;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }

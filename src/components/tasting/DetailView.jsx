@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { formatDate, DEFAULT_YOUTUBE_ID } from "./tastingData";
 
-export default function DetailView({ episode, onClose }) {
+const GUTTER_YOUTUBE_ID = "UlJHCyUyXCg";
+
+export default function DetailView({ episode, onClose, gutterMode }) {
   const [layout, setLayout] = useState("a");
 
   useEffect(() => {
@@ -11,14 +13,16 @@ export default function DetailView({ episode, onClose }) {
     };
   }, []);
 
-  const videoId = episode.frontmatter.youtubeId || DEFAULT_YOUTUBE_ID;
+  const videoId = gutterMode
+    ? GUTTER_YOUTUBE_ID
+    : (episode.frontmatter.youtubeId || DEFAULT_YOUTUBE_ID);
   const iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&rel=0&modestbranding=1&controls=0&mute=0`;
 
   const overlayClass = `__dv-overlay ${layout === "b" ? "layout-b" : "layout-a"}`;
   const panelClass = `__dv-panel ${layout === "b" ? "__dv-panel--bottom" : "__dv-panel--sidebar"}`;
 
   return (
-    <div className={overlayClass}>
+    <div className={overlayClass} data-gutter={gutterMode ? "true" : undefined}>
       <div className="__dv-video">
         <iframe
           src={iframeSrc}
