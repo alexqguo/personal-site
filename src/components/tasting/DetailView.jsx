@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { formatDate, DEFAULT_YOUTUBE_ID } from "./tastingData";
+import Ad from "./gutter/Ad";
 
 const GUTTER_YOUTUBE_ID = "UlJHCyUyXCg";
 
@@ -68,6 +69,12 @@ export default function DetailView({ episode, onClose, gutterMode }) {
                 {formatDate(episode.frontmatter.date)} ·{" "}
                 {episode.frontmatter.location}
               </div>
+              {gutterMode && (
+                <div className="__dv-ads">
+                  <Ad />
+                  <Ad />
+                </div>
+              )}
             </div>
             <hr className="__dv-divider" />
             <div className="__dv-desc-col">

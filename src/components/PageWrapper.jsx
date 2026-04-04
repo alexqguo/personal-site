@@ -8,7 +8,7 @@ const PageWrapper = ({ children }) => {
 
   return (
     <div>
-      {location.pathname !== "/" && <Nav />}
+      {location.pathname !== "/" && location.pathname !== "/tasting" && <Nav />}
       <main key={location.pathname} className="py-4 px-6 animate-fade-in">
         {children}
       </main>
