@@ -41,7 +41,9 @@ function processEpisodes() {
     if (episode === 0) continue;
 
     // "redact" future episodes
-    const isFuture = new Date(module.frontmatter.date) > new Date();
+    const isFuture =
+      new Date(module.frontmatter.date) > new Date() &&
+      !window.location.origin.includes("localhost");
     if (isFuture) {
       module.frontmatter.title = "???";
       module.frontmatter.subtitle = "???";
