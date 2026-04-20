@@ -40,12 +40,21 @@ function processEpisodes() {
 
     if (episode === 0) continue;
 
+    // "redact" future episodes
+    const isFuture = new Date(module.frontmatter.date) > new Date();
+    if (isFuture) {
+      module.frontmatter.title = "???";
+      module.frontmatter.subtitle = "???";
+      module.frontmatter.location = "???";
+      module.frontmatter.tags = [];
+    }
+
     episodes.push({
       id: filename,
       season,
       episode,
       frontmatter: module.frontmatter,
-      Component: module.default,
+      Component: isFuture ? "div" : module.default,
     });
   }
 

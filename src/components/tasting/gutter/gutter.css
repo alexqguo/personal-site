@@ -353,6 +353,62 @@ body:has([data-gutter="true"]) .__gutter-toggle:active {
   font-weight: bold;
 }
 
+.g-ad-ed {
+  background: linear-gradient(180deg, #4a0010, #880022);
+  color: #ffddaa;
+  font-weight: bold;
+}
+
+.g-ad-ed .g-ad-link {
+  color: #ffff00;
+}
+
+.g-ad-streaming {
+  background: #050514;
+  color: #00ccff;
+  font-family: "Courier New", monospace;
+  font-size: 0.65rem;
+}
+
+.g-ad-streaming .g-ad-headline {
+  color: #ff3399;
+  font-family: Arial, sans-serif;
+  font-size: 0.75rem;
+}
+
+.g-ad-streaming .g-ad-link {
+  color: #00ff99;
+}
+
+.g-ad-taxes {
+  background: #f5f0dc;
+  border-color: #006600;
+  color: #cc0000;
+  font-weight: bold;
+}
+
+.g-ad-taxes .g-ad-headline {
+  color: #006600;
+}
+
+.g-ad-taxes .g-ad-link {
+  color: #0000cc;
+}
+
+.g-ad-bald {
+  background: linear-gradient(180deg, #ffe8cc, #ffcc99);
+  color: #663300;
+  font-weight: bold;
+}
+
+.g-ad-bald .g-ad-headline {
+  color: #990000;
+}
+
+.g-ad-bald .g-ad-link {
+  color: #0000cc;
+}
+
 .g-blink {
   animation: g-blink 0.8s step-end infinite;
 }
