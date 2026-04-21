@@ -67,7 +67,7 @@ function processEpisodes() {
     ep.sequentialNum = i + 1;
   });
 
-  return episodes;
+  return episodes.reverse();
 }
 
 const episodes = processEpisodes();
