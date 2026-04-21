@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { formatDate, DEFAULT_YOUTUBE_ID } from "./tastingData";
 import Ad from "./gutter/Ad";
+import useAutoScroll from "./useAutoScroll";
 
 const GUTTER_YOUTUBE_ID = "UlJHCyUyXCg";
 
 export default function DetailView({ episode, onClose, gutterMode }) {
-  const [layout, setLayout] = useState(() => window.innerWidth < 768 ? "b" : "a");
+  const [layout, setLayout] = useState(() =>
+    window.innerWidth < 768 ? "bottom" : "sidebar",
+  );
+  const textContainerRef = useRef(null);
+  const [scrolling, setScrolling] = useAutoScroll(textContainerRef);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -16,11 +21,11 @@ export default function DetailView({ episode, onClose, gutterMode }) {
 
   const videoId = gutterMode
     ? GUTTER_YOUTUBE_ID
-    : (episode.frontmatter.youtubeId || DEFAULT_YOUTUBE_ID);
+    : episode.frontmatter.youtubeId || DEFAULT_YOUTUBE_ID;
   const iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&rel=0&modestbranding=1&controls=0&mute=0`;
 
-  const overlayClass = `__dv-overlay ${layout === "b" ? "layout-b" : "layout-a"}`;
-  const panelClass = `__dv-panel ${layout === "b" ? "__dv-panel--bottom" : "__dv-panel--sidebar"}`;
+  const overlayClass = `__dv-overlay layout-${layout}`;
+  const panelClass = `__dv-panel __dv-panel--${layout}`;
 
   return (
     <div className={overlayClass} data-gutter={gutterMode ? "true" : undefined}>
@@ -40,14 +45,20 @@ export default function DetailView({ episode, onClose, gutterMode }) {
             </button>
             <div className="__dv-layout-toggle">
               <button
-                className={`__dv-lt-btn ${layout === "a" ? "active" : ""}`}
-                onClick={() => setLayout("a")}
+                className={`__dv-lt-btn ${scrolling ? "active" : ""}`}
+                onClick={() => setScrolling((s) => !s)}
+              >
+                {scrolling ? "⏸" : "⏵"}
+              </button>
+              <button
+                className={`__dv-lt-btn ${layout === "sidebar" ? "active" : ""}`}
+                onClick={() => setLayout("sidebar")}
               >
                 ◨
               </button>
               <button
-                className={`__dv-lt-btn ${layout === "b" ? "active" : ""}`}
-                onClick={() => setLayout("b")}
+                className={`__dv-lt-btn ${layout === "bottom" ? "active" : ""}`}
+                onClick={() => setLayout("bottom")}
               >
                 ⬓
               </button>
@@ -77,7 +88,7 @@ export default function DetailView({ episode, onClose, gutterMode }) {
               )}
             </div>
             <hr className="__dv-divider" />
-            <div className="__dv-desc-col">
+            <div className="__dv-desc-col" ref={textContainerRef}>
               <div className="__dv-desc __tasting-post">
                 <episode.Component />
               </div>

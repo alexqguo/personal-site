@@ -208,10 +208,10 @@ footer {
   background: #000;
   display: flex;
 }
-.__dv-overlay.layout-a {
+.__dv-overlay.layout-sidebar {
   flex-direction: row;
 }
-.__dv-overlay.layout-b {
+.__dv-overlay.layout-bottom {
   flex-direction: column;
 }
 .__dv-video {
@@ -245,14 +245,28 @@ footer {
   flex-basis: 370px;
   height: 100%;
   border-left: 1px solid rgba(180, 145, 55, 0.15);
+  overflow: hidden;
+}
+.__dv-panel--sidebar .__dv-panel-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.__dv-panel--sidebar .__dv-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.__dv-panel--sidebar .__dv-info-col {
+  flex-shrink: 0;
+}
+.__dv-panel--sidebar .__dv-desc-col {
+  flex: 1;
   overflow-y: auto;
-}
-.__dv-panel--sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-.__dv-panel--sidebar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
+  min-height: 0;
 }
 
 /* Layout B: bottom sheet */
@@ -349,10 +363,10 @@ footer {
   padding-left: 1.5rem;
   min-height: 0;
 }
-.__dv-panel--bottom .__dv-desc-col::-webkit-scrollbar {
+.__dv-desc-col::-webkit-scrollbar {
   width: 4px;
 }
-.__dv-panel--bottom .__dv-desc-col::-webkit-scrollbar-thumb {
+.__dv-desc-col::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
@@ -363,12 +377,8 @@ footer {
     height: 55%;
     flex-basis: 55%;
   }
-  .__dv-panel--bottom .__dv-panel-inner {
-    overflow-y: auto;
-  }
   .__dv-panel--bottom .__dv-content {
     flex-direction: column;
-    overflow: visible;
   }
   .__dv-panel--bottom .__dv-info-col {
     width: auto;
@@ -376,9 +386,7 @@ footer {
     padding-right: 0;
   }
   .__dv-panel--bottom .__dv-desc-col {
-    overflow-y: visible;
     padding-left: 0;
-    min-height: unset;
   }
   .__dv-panel--bottom .__dv-divider {
     border-left: none;
@@ -393,6 +401,7 @@ footer {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.07);
   margin: 0.875rem 0 1rem;
+  flex-shrink: 0;
 }
 .__dv-panel--bottom .__dv-divider {
   border-top: none;
