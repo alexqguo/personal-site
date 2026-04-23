@@ -40,28 +40,46 @@ export default function GutterPage({ episodes, onEpisodeClick }) {
         <AdBanner />
 
         <p className="g-tagline">
-          Welcome! The Tasting Series is an ongoing exploration of adult
-          beverages. You'll just have to join us to see what I mean.
+          Welcome! The Tasting Series is where we drink random alcohols. We're
+          having a good time so come join us and see.
         </p>
 
         <div className="g-sponsors-box">
           <div className="g-sponsors-head">★ Official Sponsors ★</div>
           <div className="g-sc-row">
             <span className="g-sc-label">GOLD:</span>
-            {["Shana L", "Dave S", "Pinghao Q", "Nancy H", "Raheed A", "JT A", "Ben H", "Gandherva GT", "Andrew S", "Alex V", "Vikas G"].map((n) => (
-              <span key={n} className="g-sc-pill g-sc-gold">{n}</span>
+            {[
+              "Shana L",
+              "Dave S",
+              "Pinghao Q",
+              "Nancy H",
+              "Raheed A",
+              "JT A",
+              "Ben H",
+              "Gandherva GT",
+              "Andrew S",
+              "Alex V",
+              "Vikas G",
+            ].map((n) => (
+              <span key={n} className="g-sc-pill g-sc-gold">
+                {n}
+              </span>
             ))}
           </div>
           <div className="g-sc-row">
             <span className="g-sc-label">SILVER:</span>
             {["Ishan P", "Alberto N", "Sean P"].map((n) => (
-              <span key={n} className="g-sc-pill g-sc-silver">{n}</span>
+              <span key={n} className="g-sc-pill g-sc-silver">
+                {n}
+              </span>
             ))}
           </div>
           <div className="g-sc-row">
             <span className="g-sc-label">BRONZE:</span>
             {["Dillon C", "Akshay N"].map((n) => (
-              <span key={n} className="g-sc-pill g-sc-bronze">{n}</span>
+              <span key={n} className="g-sc-pill g-sc-bronze">
+                {n}
+              </span>
             ))}
           </div>
         </div>
@@ -84,7 +102,9 @@ export default function GutterPage({ episodes, onEpisodeClick }) {
                 <td className="g-ep-title">
                   <a>{ep.frontmatter.title}</a>
                   {(ep.frontmatter.tags || []).map((tag) => (
-                    <span key={tag} className="g-ep-tag">{tag}</span>
+                    <span key={tag} className="g-ep-tag">
+                      {tag}
+                    </span>
                   ))}
                 </td>
                 <td className="g-ep-sub">{ep.frontmatter.subtitle}</td>

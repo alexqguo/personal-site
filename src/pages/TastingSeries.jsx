@@ -57,8 +57,8 @@ export default function TastingSeries() {
             <h1>Tasting Atelier</h1>
             <p className="__tasting-tagline">
               Welcome! The Tasting Atelier is an ongoing series of curated
-              tasting events, exploring the world of adult beverages through a
-              unique lense. You'll just have to join us to see what I mean.
+              tasting events devoted to the world of fine adult beverages. We
+              invite you to join us.
             </p>
 
             <SponsorCards />
